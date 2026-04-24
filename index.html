@@ -98,17 +98,36 @@ body {
 /* HERO */
 .video-bg {
   height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FDF5E6;
+}
+
+/* 🎥 VIDEO CONTAINER */
+.video-container {
   position: relative;
-}
-.video-bg video {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-width: 100%;
 }
-.overlay {
+
+.video-container video {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  background: #FDF5E6;
+}
+
+/* 🎯 CONTENT ON VIDEO */
+.video-content {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px;
 }
 
 /* NAME */
@@ -138,6 +157,13 @@ body {
 .count-box span {
   font-size: 1.5rem;
   color: #D4AF37;
+}
+
+/* GANESHA */
+.ganesha-center {
+  width: 50px;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 0 6px rgba(212,175,55,0.6));
 }
 
 /* MEMORY */
@@ -178,15 +204,7 @@ body {
   cursor: pointer;
 }
 
-/* 🕉️ GANESHA */
-.ganesha-center {
-  width: 55px;
-  margin-bottom: 12px;
-  opacity: 0.95;
-  filter: drop-shadow(0 0 6px rgba(212,175,55,0.6));
-}
-
-/* 📱 MOBILE FIX */
+/* 📱 MOBILE */
 @media (max-width: 768px) {
 
   .name { font-size: 2.2rem; }
@@ -196,7 +214,7 @@ body {
     padding: 0 10px;
   }
 
-  .ganesha-center { width: 45px; }
+  .ganesha-center { width: 40px; }
 
   .slider {
     max-width: 90%;
@@ -225,29 +243,13 @@ body {
 
   .intro-name { font-size: 2rem; }
   .intro-sub { font-size: 0.9rem; }
-
-  /* 🎥 FINAL VIDEO FIX */
-  .video-bg {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: black;
-  }
-
-  .video-bg video {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
-    object-fit: contain;
-  }
 }
 </style>
 </head>
 
 <body>
 
+<!-- INTRO -->
 <div id="introScreen">
   <video autoplay muted loop class="intro-video">
     <source src="https://www.w3schools.com/howto/rain.mp4">
@@ -264,26 +266,29 @@ body {
 <img src="Top.png" class="corner top-right">
 <img src="Bottom.png" class="corner bottom-left">
 
+<!-- MAIN -->
 <div id="main" style="display:none;">
 
 <section class="video-bg">
-  <video autoplay muted loop>
-    <source src="https://www.w3schools.com/howto/rain.mp4">
-  </video>
-  <div class="overlay"></div>
 
-  <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+  <div class="video-container">
+    <video autoplay muted loop>
+      <source src="https://www.w3schools.com/howto/rain.mp4">
+    </video>
 
-    <img src="lordganesh.png" class="ganesha-center">
+    <div class="video-content">
+      <img src="lordganesh.png" class="ganesha-center">
 
-    <h1 class="name">Nirbhay <span>&</span> Partner</h1>
+      <h1 class="name">Nirbhay <span>&</span> Partner</h1>
 
-    <p class="invite-line">
-      Together with their families, request the pleasure of your presence
-    </p>
+      <p class="invite-line">
+        Together with their families, request the pleasure of your presence
+      </p>
 
-    <div class="flex gap-4 mt-6 flex-wrap justify-center" id="countdown"></div>
+      <div class="flex gap-4 mt-6 flex-wrap justify-center" id="countdown"></div>
+    </div>
   </div>
+
 </section>
 
 <section class="py-16 text-center">
@@ -304,7 +309,7 @@ body {
 
   <div class="map-card">
     <iframe 
-      src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d3575.3392701684916!2d81.1581766!3d26.3478865!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjbCsDIwJzUwLjMiTiA4McKwMDknMzQuNyJF!5e0!3m2!1sen!2sin!4v1777030926628!5m2!1sen!2sin"
+      src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d3575.3392701684916!2d81.1581766!3d26.3478865!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjbCsDIwJzUwLjMiTiA4McKwMDknMzQuNyJF!5e0!3m2!1sen!2sin"
       width="100%" height="250" style="border:0;">
     </iframe>
   </div>
@@ -312,13 +317,14 @@ body {
 
 </div>
 
+<!-- MUSIC -->
 <div id="musicBtn">🎵</div>
 <audio id="music" loop>
   <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
 </audio>
 
 <script>
-// intro
+// INTRO
 window.addEventListener("load", () => {
   setTimeout(() => {
     const intro = document.getElementById("introScreen");
@@ -332,7 +338,7 @@ window.addEventListener("load", () => {
   }, 2200);
 });
 
-// countdown (your accurate one)
+// COUNTDOWN (accurate)
 const targetDate = new Date("Nov 30, 2026");
 
 function updateCountdown() {
@@ -373,7 +379,7 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// slider
+// SLIDER
 let i=0;
 const slides=document.querySelectorAll(".slide");
 setInterval(()=>{
@@ -382,7 +388,7 @@ setInterval(()=>{
   i=(i+1)%slides.length;
 },3000);
 
-// music
+// MUSIC
 const music=document.getElementById('music');
 const btn=document.getElementById('musicBtn');
 
