@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Wedding Invitation</title>
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=Montserrat:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- AOS Animation -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+<style>
+body {
+  font-family: 'Montserrat', sans-serif;
+  background: #FDF5E6 url('https://www.transparenttextures.com/patterns/marble.png');
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.3);
+}
+
+/* Floating particles */
+.particle {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: #D4AF37;
+  border-radius: 50%;
+  opacity: 0.4;
+  animation: float 10s linear infinite;
+}
+
+@keyframes float {
+  from {transform: translateY(100vh);}
+  to {transform: translateY(-10vh);}
+}
+
+/* Carousel */
+.carousel img {
+  transition: opacity 1s ease-in-out;
+}
+
+/* Music button */
+#musicBtn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #D4AF37;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+/* RSVP */
+input, select {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 8px;
+  width: 100%;
+}
+</style>
+</head>
+
+<body class="text-[#333333]">
+
+<!-- Floating particles -->
+<script>
+for(let i=0;i<25;i++){
+  let p=document.createElement('div');
+  p.className='particle';
+  p.style.left=Math.random()*100+'vw';
+  p.style.animationDuration=(5+Math.random()*10)+'s';
+  document.body.appendChild(p);
+}
+</script>
+
+<!-- HERO -->
+<section class="text-center py-20 px-6" data-aos="fade-up">
+  <h1 class="text-5xl md:text-6xl font-bold font-[Playfair_Display]">
+    Nirbhay <span class="text-[#D4AF37]">&</span> Partner
+  </h1>
+
+  <!-- Countdown -->
+  <div class="glass mt-10 p-6 rounded-xl inline-block">
+    <div id="countdown" class="flex gap-6 text-xl md:text-2xl"></div>
+  </div>
+</section>
+
+<!-- MEMORIES -->
+<section class="py-16 text-center" data-aos="fade-up">
+  <h2 class="text-4xl font-[Great_Vibes] text-[#D4AF37] mb-8">Memories</h2>
+
+  <div class="carousel max-w-xl mx-auto relative">
+    <img src="https://picsum.photos/600/400?1" class="rounded-xl shadow-lg absolute w-full opacity-100">
+    <img src="https://picsum.photos/600/400?2" class="rounded-xl shadow-lg absolute w-full opacity-0">
+    <img src="https://picsum.photos/600/400?3" class="rounded-xl shadow-lg absolute w-full opacity-0">
+  </div>
+</section>
+
+<!-- LOCATION -->
+<section class="py-16 text-center" data-aos="fade-up">
+  <h2 class="text-3xl font-[Playfair_Display] mb-4">Venue</h2>
+  <p class="mb-4">Grand Palace, Lucknow</p>
+
+  <a href="https://maps.google.com" target="_blank"
+    class="bg-[#D4AF37] text-white px-6 py-3 rounded-full shadow-lg hover:scale-105 transition">
+    View Location
+  </a>
+</section>
+
+<!-- RSVP -->
+<section class="py-16 px-6 max-w-md mx-auto text-center" data-aos="fade-up">
+  <h2 class="text-3xl font-[Playfair_Display] mb-6">RSVP</h2>
+
+  <form onsubmit="submitRSVP(event)" class="space-y-4">
+    <input type="text" placeholder="Your Name" required>
+    <select required>
+      <option value="">Will you attend?</option>
+      <option>Yes</option>
+      <option>No</option>
+    </select>
+
+    <button class="bg-[#333333] text-white px-6 py-2 rounded-full hover:bg-black">
+      Submit
+    </button>
+  </form>
+
+  <p id="msg" class="mt-4 text-green-600 hidden">Thank you for your response!</p>
+</section>
+
+<!-- MUSIC -->
+<div id="musicBtn">🎵</div>
+<audio id="music" loop>
+  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3" type="audio/mp3">
+</audio>
+
+<!-- SCRIPTS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+
+<script>
+// AOS init
+AOS.init();
+
+// Countdown
+const target = new Date("Nov 30, 2026 00:00:00").getTime();
+const countdown = document.getElementById("countdown");
+
+setInterval(()=>{
+  let now = new Date().getTime();
+  let diff = target - now;
+
+  let d = Math.floor(diff/(1000*60*60*24));
+  let h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
+  let m = Math.floor((diff%(1000*60*60))/(1000*60));
+  let s = Math.floor((diff%(1000*60))/1000);
+
+  countdown.innerHTML = `
+    <div>${d}<br>Days</div>
+    <div>${h}<br>Hours</div>
+    <div>${m}<br>Minutes</div>
+    <div>${s}<br>Seconds</div>
+  `;
+},1000);
+
+// Carousel
+let index = 0;
+const images = document.querySelectorAll('.carousel img');
+
+setInterval(()=>{
+  images.forEach(img => img.style.opacity = 0);
+  images[index].style.opacity = 1;
+  index = (index + 1) % images.length;
+},3000);
+
+// RSVP
+function submitRSVP(e){
+  e.preventDefault();
+  document.getElementById('msg').classList.remove('hidden');
+}
+
+// Music
+const music = document.getElementById('music');
+const btn = document.getElementById('musicBtn');
+
+btn.onclick = () => {
+  if(music.paused){
+    music.play();
+    btn.innerText="⏸";
+  } else {
+    music.pause();
+    btn.innerText="🎵";
+  }
+};
+</script>
+
+</body>
+</html>
