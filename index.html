@@ -18,14 +18,13 @@ body {
 
 /* GOLD BORDER */
 .border-frame {
-  border: 10px solid transparent;
-  padding: 10px;
+  border: 8px solid transparent;
   background: linear-gradient(#FDF5E6, #FDF5E6) padding-box,
               linear-gradient(45deg, #D4AF37, #fff2c2, #D4AF37) border-box;
 }
 
 /* ENVELOPE */
-.envelope {
+.envelope-container {
   position: fixed;
   inset: 0;
   background: #FDF5E6;
@@ -33,56 +32,49 @@ body {
   align-items: center;
   justify-content: center;
   z-index: 9999;
+  overflow: hidden;
 }
 
-.flap {
-  width: 250px;
-  height: 150px;
+.envelope {
+  width: 260px;
+  height: 160px;
   background: #D4AF37;
   position: relative;
   cursor: pointer;
+  border-radius: 6px;
+}
+
+.flap {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #c9a52f;
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
   transform-origin: top;
   transition: transform 1s ease;
 }
 
-.flap::before {
-  content: "";
-  position: absolute;
-  width: 250px;
-  height: 150px;
-  background: #c9a52f;
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-}
-
-.open {
+.open .flap {
   transform: rotateX(180deg);
 }
 
-/* CINEMATIC INTRO */
-.intro {
-  position: fixed;
-  inset: 0;
-  background: black;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Playfair Display', serif;
-  font-size: 2.5rem;
-  letter-spacing: 3px;
-  opacity: 0;
-  z-index: 9998;
+/* Reveal animation */
+.reveal {
+  animation: revealPage 1.2s ease forwards;
 }
 
-/* VIDEO HERO */
+@keyframes revealPage {
+  from {transform: scale(0.6); opacity:0;}
+  to {transform: scale(1); opacity:1;}
+}
+
+/* HERO */
 .video-bg {
   height: 100vh;
   position: relative;
-  overflow: hidden;
 }
 
 .video-bg video {
-  position: absolute;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -94,31 +86,57 @@ body {
   background: rgba(0,0,0,0.5);
 }
 
-/* PARALLAX */
-.parallax {
-  transform: translateZ(0);
-  transition: transform 0.2s;
-}
-
 /* NAME */
 .name {
-  font-family: 'Playfair Display', serif;
-  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-family: 'Playfair Display';
+  font-size: clamp(2.5rem,6vw,5rem);
   color: white;
 }
 
 .glow {
   color: #D4AF37;
-  text-shadow: 0 0 25px rgba(212,175,55,0.8);
+  text-shadow: 0 0 25px rgba(212,175,55,0.9);
 }
 
-/* SLIDER */
+/* COUNTDOWN */
+.count-box {
+  color: white;
+  text-align: center;
+  padding: 10px;
+}
+
+.count-box span {
+  font-size: 1.5rem;
+  display: block;
+  text-shadow: 0 0 15px rgba(212,175,55,0.8);
+}
+
+/* SLIDER FIXED */
+.slider {
+  max-width: 90%;
+  margin: auto;
+  position: relative;
+}
+
 .slider img {
   width: 100%;
   border-radius: 12px;
-  position: absolute;
-  opacity: 0;
-  transition: 1s;
+  display: none;
+}
+
+.slider img.active {
+  display: block;
+}
+
+/* MAP FIXED */
+.map-container {
+  max-width: 90%;
+  margin: auto;
+}
+
+.map-container img {
+  width: 100%;
+  border-radius: 12px;
 }
 
 /* MUSIC */
@@ -138,58 +156,58 @@ body {
 <body>
 
 <!-- ENVELOPE -->
-<div class="envelope" id="envelope">
-  <div class="flap" onclick="openInvite()"></div>
+<div class="envelope-container" id="envelopeContainer">
+  <div class="envelope" onclick="openInvite(this)">
+    <div class="flap"></div>
+  </div>
 </div>
 
-<!-- INTRO -->
-<div class="intro" id="intro">
-  A LOVE STORY BEGINS
-</div>
-
-<!-- MAIN CONTENT -->
+<!-- MAIN -->
 <div id="main" class="hidden">
 
 <div class="border-frame">
 
 <!-- HERO -->
-<section class="video-bg parallax">
+<section class="video-bg">
   <video autoplay muted loop>
     <source src="https://www.w3schools.com/howto/rain.mp4">
   </video>
 
   <div class="overlay"></div>
 
-  <div class="absolute inset-0 flex flex-col items-center justify-center text-center">
+  <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
     <h1 class="name">
-      Nirbhay <span class="glow">Weds</span> Shalu
+      Nirbhay <span class="glow">&</span> Partner
     </h1>
 
-    <div class="mt-6 text-white" id="countdown"></div>
+    <!-- Countdown -->
+    <div class="flex gap-4 mt-6" id="countdown"></div>
   </div>
 </section>
 
 <!-- MEMORY -->
-<section class="py-16 text-center parallax">
+<section class="py-16 text-center">
   <h2 class="text-3xl font-[Great_Vibes] text-[#D4AF37] mb-6">
     Our Journey Continues...
   </h2>
 
-  <div class="slider max-w-md mx-auto">
-    <img src="https://picsum.photos/600/400?1" style="opacity:1">
+  <div class="slider">
+    <img src="https://picsum.photos/600/400?1" class="active">
     <img src="https://picsum.photos/600/400?2">
     <img src="https://picsum.photos/600/400?3">
   </div>
 </section>
 
 <!-- MAP -->
-<section class="py-16 text-center parallax">
-  <h2 class="text-3xl font-[Playfair_Display]">Venue</h2>
+<section class="py-16 text-center">
+  <h2 class="text-3xl font-[Playfair_Display] mb-4">Venue</h2>
   <p class="mb-4">Grand Palace, Lucknow</p>
 
-  <a href="https://maps.google.com?q=Lucknow" target="_blank">
-    <img src="https://maps.googleapis.com/maps/api/staticmap?center=Lucknow&zoom=14&size=600x300&markers=color:gold|Lucknow" class="mx-auto shadow-lg">
-  </a>
+  <div class="map-container">
+    <a href="https://maps.google.com?q=Lucknow" target="_blank">
+      <img src="https://maps.googleapis.com/maps/api/staticmap?center=Lucknow&zoom=14&size=600x300&markers=color:gold|Lucknow">
+    </a>
+  </div>
 </section>
 
 </div>
@@ -202,24 +220,19 @@ body {
 </audio>
 
 <script>
-// ENVELOPE FLOW
-function openInvite(){
-  document.querySelector('.flap').classList.add('open');
+// ENVELOPE FIXED
+function openInvite(el){
+  el.classList.add("open");
 
   setTimeout(()=>{
-    document.getElementById('envelope').style.display='none';
-    let intro = document.getElementById('intro');
-    intro.style.opacity = 1;
-
-    setTimeout(()=>{
-      intro.style.display='none';
-      document.getElementById('main').classList.remove('hidden');
-    },2500);
-
+    document.getElementById("envelopeContainer").style.display="none";
+    const main = document.getElementById("main");
+    main.classList.remove("hidden");
+    main.classList.add("reveal");
   },1000);
 }
 
-// COUNTDOWN
+// COUNTDOWN BEAUTIFIED
 const target = new Date("Nov 30, 2026").getTime();
 setInterval(()=>{
   let now = new Date().getTime();
@@ -230,26 +243,22 @@ setInterval(()=>{
   let m = Math.floor((diff%(1000*60*60))/(1000*60));
   let s = Math.floor((diff%(1000*60))/1000);
 
-  document.getElementById("countdown").innerHTML =
-    `${d}D ${h}H ${m}M ${s}S`;
+  document.getElementById("countdown").innerHTML = `
+    <div class="count-box"><span>${d}</span>Days</div>
+    <div class="count-box"><span>${h}</span>Hours</div>
+    <div class="count-box"><span>${m}</span>Minutes</div>
+    <div class="count-box"><span>${s}</span>Seconds</div>
+  `;
 },1000);
 
-// SLIDER
+// SLIDER FIXED
 let i=0;
 const slides=document.querySelectorAll(".slider img");
 setInterval(()=>{
-  slides.forEach(img=>img.style.opacity=0);
-  slides[i].style.opacity=1;
+  slides.forEach(img=>img.classList.remove("active"));
+  slides[i].classList.add("active");
   i=(i+1)%slides.length;
 },3000);
-
-// PARALLAX
-window.addEventListener("scroll",()=>{
-  document.querySelectorAll(".parallax").forEach(el=>{
-    let speed = 0.2;
-    el.style.transform = `translateY(${window.scrollY * speed}px)`;
-  });
-});
 
 // MUSIC
 const music=document.getElementById('music');
