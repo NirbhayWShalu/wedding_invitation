@@ -6,72 +6,33 @@
 
 <title>Wedding Invitation</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
 body {
   font-family: 'Montserrat', sans-serif;
   background: #FDF5E6;
-  overflow-x: hidden;
 }
 
-/* 🌸 PETALS */
-.petal {
+/* 🧧 CORNER FLORAL */
+.corner {
   position: fixed;
-  top: -10px;
-  width: 12px;
-  height: 12px;
-  background: radial-gradient(circle, #ffb6c1, #ff69b4);
-  border-radius: 50%;
-  opacity: 0.6;
-  pointer-events: none;
-  animation: fall linear infinite;
+  width: 80px;
+  opacity: 0.8;
 }
+.top-left { top: 0; left: 0; }
+.top-right { top: 0; right: 0; transform: rotate(90deg); }
+.bottom-left { bottom: 0; left: 0; transform: rotate(-90deg); }
+.bottom-right { bottom: 0; right: 0; transform: rotate(180deg); }
 
-@keyframes fall {
-  to {
-    transform: translateY(110vh) rotate(360deg);
-  }
-}
-
-/* 🧧 FLORAL BORDER */
-.border-frame {
-  position: relative;
-  padding: 12px;
-}
-
-.border-frame::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border: 10px solid transparent;
-  background: linear-gradient(#FDF5E6,#FDF5E6) padding-box,
-              linear-gradient(45deg,#D4AF37,#fff2c2,#D4AF37) border-box;
-  z-index: -1;
-}
-
-/* subtle shimmer */
-.border-frame::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
-  animation: shimmer 6s infinite;
-  pointer-events: none;
-}
-
-@keyframes shimmer {
-  0% {transform: translateX(-100%);}
-  100% {transform: translateX(100%);}
-}
-
-/* GANESHA */
+/* 🕉️ GANESHA */
 .ganesha {
   position: fixed;
-  top: 15px;
-  left: 15px;
-  width: 45px;
+  top: 12px;
+  left: 12px;
+  width: 38px;
+  z-index: 10;
 }
 
 /* HERO */
@@ -90,15 +51,45 @@ body {
   background: rgba(0,0,0,0.5);
 }
 
-/* NAME */
+/* 💞 NAME ANIMATION */
 .name {
   font-family: 'Playfair Display';
   font-size: clamp(2.5rem,6vw,5rem);
   color: white;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 1.5s ease forwards;
 }
-.glow {
+
+.name span {
   color: #D4AF37;
-  text-shadow: 0 0 25px rgba(212,175,55,0.9);
+  opacity: 0;
+  animation: glowFade 2s ease forwards;
+  animation-delay: 1s;
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glowFade {
+  to {
+    opacity: 1;
+    text-shadow: 0 0 15px rgba(212,175,55,0.7);
+  }
+}
+
+/* INVITE LINE */
+.invite-line {
+  color: white;
+  font-size: 0.95rem;
+  margin-top: 12px;
+  opacity: 0;
+  animation: fadeUp 1.5s ease forwards;
+  animation-delay: 0.8s;
 }
 
 /* COUNTDOWN */
@@ -107,24 +98,12 @@ body {
   text-align: center;
 }
 .count-box span {
-  font-size: 1.4rem;
-  display: block;
-  text-shadow: 0 0 12px rgba(212,175,55,0.7);
+  font-size: 1.2rem;
 }
 
-/* QUOTE */
-.quote {
-  font-family: 'Playfair Display';
-  font-style: italic;
-  max-width: 600px;
-  margin: auto;
-  color: #555;
-}
-
-/* SLIDER */
+/* MEMORY */
 .slider {
-  width: 80%;
-  max-width: 380px;
+  max-width: 360px;
   margin: auto;
   position: relative;
 }
@@ -133,22 +112,22 @@ body {
   width: 100%;
   border-radius: 12px;
   opacity: 0;
-  transform: scale(0.9);
-  transition: 0.8s;
+  transition: opacity 1s;
 }
 .slide.active {
   opacity: 1;
-  transform: scale(1);
 }
 
 /* MAP */
 .map-card {
-  max-width: 420px;
+  max-width: 380px;
   margin: auto;
-  background: white;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  border: 1px solid #ddd;
+}
+.map-card img {
+  width: 100%;
 }
 
 /* MUSIC */
@@ -167,21 +146,14 @@ body {
 
 <body>
 
-<!-- 🌸 PETALS SCRIPT -->
-<script>
-for(let i=0;i<20;i++){
-  let p=document.createElement("div");
-  p.className="petal";
-  p.style.left=Math.random()*100+"vw";
-  p.style.animationDuration=(5+Math.random()*5)+"s";
-  document.body.appendChild(p);
-}
-</script>
+<!-- 🧧 CORNERS -->
+<img src="https://www.transparenttextures.com/patterns/asfalt-light.png" class="corner top-left">
+<img src="https://www.transparenttextures.com/patterns/asfalt-light.png" class="corner top-right">
+<img src="https://www.transparenttextures.com/patterns/asfalt-light.png" class="corner bottom-left">
+<img src="https://www.transparenttextures.com/patterns/asfalt-light.png" class="corner bottom-right">
 
 <!-- 🕉️ GANESHA -->
 <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Ganesha_simple_icon.png" class="ganesha">
-
-<div class="border-frame">
 
 <!-- HERO -->
 <section class="video-bg">
@@ -192,25 +164,23 @@ for(let i=0;i<20;i++){
   <div class="overlay"></div>
 
   <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+    
     <h1 class="name">
-      Nirbhay <span class="glow">&</span> Partner
+      Nirbhay <span>&</span> Partner
     </h1>
+
+    <p class="invite-line">
+      Together with their families, request the pleasure of your presence
+    </p>
 
     <div class="flex gap-4 mt-6" id="countdown"></div>
   </div>
 </section>
 
-<!-- QUOTE -->
-<section class="py-12 text-center">
-  <p class="quote">
-    "Where there is love, there is life."
-  </p>
-</section>
-
 <!-- MEMORY -->
-<section class="py-12 text-center">
-  <h2 class="text-3xl font-[Great_Vibes] text-[#D4AF37] mb-6">
-    Our Journey Continues...
+<section class="py-16 text-center">
+  <h2 class="text-3xl font-[Playfair_Display] text-[#D4AF37] mb-6">
+    Our Journey Continues
   </h2>
 
   <div class="slider">
@@ -229,11 +199,10 @@ for(let i=0;i<20;i++){
     <a href="https://maps.google.com?q=Lucknow" target="_blank">
       <img src="https://maps.googleapis.com/maps/api/staticmap?center=Lucknow&zoom=14&size=600x300&markers=color:gold|Lucknow">
     </a>
-    <div class="p-4 text-sm text-gray-600">Tap to open in Google Maps</div>
   </div>
-</section>
 
-</div>
+  <p class="text-sm mt-3 text-gray-500">Tap to open in Google Maps</p>
+</section>
 
 <!-- MUSIC -->
 <div id="musicBtn">🎵</div>
@@ -268,7 +237,7 @@ setInterval(()=>{
   slides.forEach(s=>s.classList.remove("active"));
   slides[i].classList.add("active");
   i=(i+1)%slides.length;
-},3500);
+},3000);
 
 // MUSIC
 const music=document.getElementById('music');
