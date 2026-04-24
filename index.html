@@ -93,7 +93,7 @@ body {
   z-index: 5;
 }
 .top-right { top:0; right:0; }
-.bottom-left { bottom:0; left:0; transform: rotate(270deg);}
+.bottom-left { bottom:0; left:0; transform: rotate(180deg);}
 
 /* HERO */
 .video-bg {
@@ -324,11 +324,12 @@ function updateCountdown() {
 
   document.getElementById("countdown").innerHTML = `
     ${years > 0 ? `<div class="count-box"><span>${years}</span>Years</div>` : ""}
-    <div class="count-box"><span>${months}</span>M</div>
-    <div class="count-box"><span>${days}</span>D</div>
-    <div class="count-box"><span>${hours}</span>H</div>
-    <div class="count-box"><span>${minutes}</span>M</div>
-    <div class="count-box"><span>${seconds}</span>S</div>
+    <div class="count-box"><span>${months}</span>Months</div>
+    <div class="count-box"><span>${days}</span>Days</div>
+    <div class="count-box"><span>${hours}</span>Hours</div>
+    <div class="count-box"><span>${minutes}</span>Minutes</div>
+    <div class="count-box"><span>${seconds}</span>Seconds</div>
+    
   `;
 }
 setInterval(updateCountdown, 1000);
