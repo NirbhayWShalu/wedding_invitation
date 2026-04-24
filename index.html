@@ -226,7 +226,7 @@ body {
   .intro-name { font-size: 2rem; }
   .intro-sub { font-size: 0.9rem; }
 
-  /* 🎥 VIDEO FIX (ONLY NEW CHANGE) */
+  /* 🎥 VIDEO FIX */
   .video-bg {
     height: 100vh;
     overflow: hidden;
@@ -245,7 +245,6 @@ body {
 
 <body>
 
-<!-- INTRO -->
 <div id="introScreen">
   <video autoplay muted loop class="intro-video">
     <source src="https://www.w3schools.com/howto/rain.mp4">
@@ -259,7 +258,6 @@ body {
   </div>
 </div>
 
-<!-- CORNERS -->
 <img src="Top.png" class="corner top-right">
 <img src="Bottom.png" class="corner bottom-left">
 
@@ -275,7 +273,7 @@ body {
 
     <img src="lordganesh.png" class="ganesha-center">
 
-    <h1 class="name">Nirbhay <span>&</span> Partner</h1>
+    <h1 class="name">Nirbhay <span>&</span> Shalu</h1>
 
     <p class="invite-line">
       Together with their families, request the pleasure of your presence
@@ -334,14 +332,33 @@ const targetDate = new Date("Nov 30, 2026");
 
 function updateCountdown() {
   const now = new Date();
-  const diff = targetDate - now;
 
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
-  const minutes = Math.floor((diff / 1000 / 60) % 60);
-  const seconds = Math.floor((diff / 1000) % 60);
+  let years = targetDate.getFullYear() - now.getFullYear();
+  let months = targetDate.getMonth() - now.getMonth();
+  let days = targetDate.getDate() - now.getDate();
+
+  if (days < 0) {
+    months--;
+    const prevMonthDays = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+    days += prevMonthDays;
+  }
+
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  let hours = targetDate.getHours() - now.getHours();
+  let minutes = targetDate.getMinutes() - now.getMinutes();
+  let seconds = targetDate.getSeconds() - now.getSeconds();
+
+  if (seconds < 0) { seconds += 60; minutes--; }
+  if (minutes < 0) { minutes += 60; hours--; }
+  if (hours < 0) { hours += 24; days--; }
 
   document.getElementById("countdown").innerHTML = `
+    ${years > 0 ? `<div class="count-box"><span>${years}</span>Years</div>` : ""}
+    <div class="count-box"><span>${months}</span>Months</div>
     <div class="count-box"><span>${days}</span>Days</div>
     <div class="count-box"><span>${hours}</span>Hours</div>
     <div class="count-box"><span>${minutes}</span>Minutes</div>
