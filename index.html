@@ -16,7 +16,7 @@ body {
   margin: 0;
 }
 
-/* 💌 ENVELOPE (UPDATED ONLY THIS PART) */
+/* 💌 ENVELOPE SCREEN */
 .envelope-screen {
   position: fixed;
   inset: 0;
@@ -26,21 +26,27 @@ body {
   align-items: center;
   z-index: 9999;
 }
+
+/* CONTAINER */
 .envelope-container {
   position: relative;
   width: 260px;
   height: 180px;
   cursor: pointer;
 }
-.envelope {
+
+/* ENVELOPE BODY (CLIPS CONTENT) */
+.envelope-body {
+  position: absolute;
   width: 100%;
   height: 100%;
   background: #D4AF37;
   border-radius: 6px;
-  position: absolute;
-  bottom: 0;
+  overflow: hidden; /* 🔥 KEY FIX */
   z-index: 2;
 }
+
+/* FLAP */
 .flap {
   position: absolute;
   width: 100%;
@@ -51,34 +57,39 @@ body {
   transition: transform 1s ease;
   z-index: 3;
 }
+
+/* CARD (INSIDE ENVELOPE) */
 .invite-card {
   position: absolute;
   width: 90%;
   height: 140px;
   background: white;
   left: 5%;
-  bottom: 10px;
+  bottom: -100px; /* starts inside */
   border-radius: 6px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: 'Playfair Display';
   font-size: 1.2rem;
-  z-index: 1;
-  transition: transform 1.2s ease, opacity 0.5s;
+  transition: transform 1.2s ease;
 }
+
+/* OPEN STATES */
 .open .flap {
   transform: rotateX(180deg);
 }
 .open .invite-card {
-  transform: translateY(-220px);
+  transform: translateY(-200px);
 }
+
+/* EXPAND */
 .expand {
   animation: expandCard 1s forwards;
 }
 @keyframes expandCard {
   to {
-    transform: translateY(-220px) scale(10);
+    transform: translateY(-200px) scale(10);
     opacity: 0;
   }
 }
@@ -140,7 +151,7 @@ body {
   to {opacity:1; transform:translateY(0);}
 }
 
-/* INVITE */
+/* INVITE LINE */
 .invite-line {
   font-family: 'Cormorant Garamond', serif;
   color: #f3e3a2;
@@ -205,20 +216,25 @@ body {
 
 <body>
 
-<!-- 💌 ENVELOPE (UPDATED) -->
+<!-- 💌 ENVELOPE -->
 <div class="envelope-screen" id="envelopeScreen">
   <div class="envelope-container" onclick="openInvite()">
-    <div class="envelope">
-      <div class="flap"></div>
+    
+    <div class="envelope-body">
+      <div class="invite-card" id="inviteCard">
+        Wedding Invitation
+      </div>
     </div>
-    <div class="invite-card" id="inviteCard">
-      Wedding Invitation
-    </div>
+
+    <div class="flap"></div>
+
   </div>
 </div>
 
 <!-- 🧧 CORNERS -->
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Floral_corner_gold.svg" class="corner top-left">
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Floral_corner_gold.svg" class="corner top-right">
+<img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Floral_corner_gold.svg" class="corner bottom-left">
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Floral_corner_gold.svg" class="corner bottom-right">
 
 <!-- 🕉️ GANESHA -->
@@ -227,7 +243,7 @@ body {
 
 <!-- MAIN -->
 <div id="main" style="display:none;">
-<!-- (UNCHANGED CONTENT BELOW — SAME AS YOUR PREVIOUS CODE) -->
+
 <section class="video-bg">
   <video autoplay muted loop>
     <source src="https://www.w3schools.com/howto/rain.mp4">
@@ -279,7 +295,7 @@ body {
 </audio>
 
 <script>
-// 💌 ENVELOPE UPDATED
+// 💌 ENVELOPE (FIXED)
 function openInvite(){
   const container = document.querySelector('.envelope-container');
   const card = document.getElementById('inviteCard');
@@ -296,7 +312,7 @@ function openInvite(){
   },2000);
 }
 
-// ⏱️ COUNTDOWN (UNCHANGED CORRECT VERSION)
+// ⏱️ COUNTDOWN
 const targetDate = new Date("Nov 30, 2026");
 
 function updateCountdown() {
