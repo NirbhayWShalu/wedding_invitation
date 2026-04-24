@@ -16,56 +16,62 @@ body {
   overflow-x: hidden;
 }
 
-/* GOLD BORDER */
-.border-frame {
-  border: 8px solid transparent;
-  background: linear-gradient(#FDF5E6, #FDF5E6) padding-box,
-              linear-gradient(45deg, #D4AF37, #fff2c2, #D4AF37) border-box;
-}
-
-/* ENVELOPE */
-.envelope-container {
+/* 🌸 PETALS */
+.petal {
   position: fixed;
-  inset: 0;
-  background: #FDF5E6;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  overflow: hidden;
+  top: -10px;
+  width: 12px;
+  height: 12px;
+  background: radial-gradient(circle, #ffb6c1, #ff69b4);
+  border-radius: 50%;
+  opacity: 0.6;
+  pointer-events: none;
+  animation: fall linear infinite;
 }
 
-.envelope {
-  width: 260px;
-  height: 160px;
-  background: #D4AF37;
+@keyframes fall {
+  to {
+    transform: translateY(110vh) rotate(360deg);
+  }
+}
+
+/* 🧧 FLORAL BORDER */
+.border-frame {
   position: relative;
-  cursor: pointer;
-  border-radius: 6px;
+  padding: 12px;
 }
 
-.flap {
+.border-frame::before {
+  content: "";
   position: absolute;
-  width: 100%;
-  height: 100%;
-  background: #c9a52f;
-  clip-path: polygon(0 0, 100% 0, 50% 100%);
-  transform-origin: top;
-  transition: transform 1s ease;
+  inset: 0;
+  border: 10px solid transparent;
+  background: linear-gradient(#FDF5E6,#FDF5E6) padding-box,
+              linear-gradient(45deg,#D4AF37,#fff2c2,#D4AF37) border-box;
+  z-index: -1;
 }
 
-.open .flap {
-  transform: rotateX(180deg);
+/* subtle shimmer */
+.border-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: shimmer 6s infinite;
+  pointer-events: none;
 }
 
-/* Reveal animation */
-.reveal {
-  animation: revealPage 1.2s ease forwards;
+@keyframes shimmer {
+  0% {transform: translateX(-100%);}
+  100% {transform: translateX(100%);}
 }
 
-@keyframes revealPage {
-  from {transform: scale(0.6); opacity:0;}
-  to {transform: scale(1); opacity:1;}
+/* GANESHA */
+.ganesha {
+  position: fixed;
+  top: 15px;
+  left: 15px;
+  width: 45px;
 }
 
 /* HERO */
@@ -73,13 +79,11 @@ body {
   height: 100vh;
   position: relative;
 }
-
 .video-bg video {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-
 .overlay {
   position: absolute;
   inset: 0;
@@ -92,7 +96,6 @@ body {
   font-size: clamp(2.5rem,6vw,5rem);
   color: white;
 }
-
 .glow {
   color: #D4AF37;
   text-shadow: 0 0 25px rgba(212,175,55,0.9);
@@ -102,41 +105,50 @@ body {
 .count-box {
   color: white;
   text-align: center;
-  padding: 10px;
 }
-
 .count-box span {
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   display: block;
-  text-shadow: 0 0 15px rgba(212,175,55,0.8);
+  text-shadow: 0 0 12px rgba(212,175,55,0.7);
 }
 
-/* SLIDER FIXED */
+/* QUOTE */
+.quote {
+  font-family: 'Playfair Display';
+  font-style: italic;
+  max-width: 600px;
+  margin: auto;
+  color: #555;
+}
+
+/* SLIDER */
 .slider {
-  max-width: 90%;
+  width: 80%;
+  max-width: 380px;
   margin: auto;
   position: relative;
 }
-
-.slider img {
+.slide {
+  position: absolute;
   width: 100%;
   border-radius: 12px;
-  display: none;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: 0.8s;
+}
+.slide.active {
+  opacity: 1;
+  transform: scale(1);
 }
 
-.slider img.active {
-  display: block;
-}
-
-/* MAP FIXED */
-.map-container {
-  max-width: 90%;
+/* MAP */
+.map-card {
+  max-width: 420px;
   margin: auto;
-}
-
-.map-container img {
-  width: 100%;
+  background: white;
   border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
 }
 
 /* MUSIC */
@@ -155,15 +167,19 @@ body {
 
 <body>
 
-<!-- ENVELOPE -->
-<div class="envelope-container" id="envelopeContainer">
-  <div class="envelope" onclick="openInvite(this)">
-    <div class="flap"></div>
-  </div>
-</div>
+<!-- 🌸 PETALS SCRIPT -->
+<script>
+for(let i=0;i<20;i++){
+  let p=document.createElement("div");
+  p.className="petal";
+  p.style.left=Math.random()*100+"vw";
+  p.style.animationDuration=(5+Math.random()*5)+"s";
+  document.body.appendChild(p);
+}
+</script>
 
-<!-- MAIN -->
-<div id="main" class="hidden">
+<!-- 🕉️ GANESHA -->
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Ganesha_simple_icon.png" class="ganesha">
 
 <div class="border-frame">
 
@@ -180,21 +196,27 @@ body {
       Nirbhay <span class="glow">&</span> Partner
     </h1>
 
-    <!-- Countdown -->
     <div class="flex gap-4 mt-6" id="countdown"></div>
   </div>
 </section>
 
+<!-- QUOTE -->
+<section class="py-12 text-center">
+  <p class="quote">
+    "Where there is love, there is life."
+  </p>
+</section>
+
 <!-- MEMORY -->
-<section class="py-16 text-center">
+<section class="py-12 text-center">
   <h2 class="text-3xl font-[Great_Vibes] text-[#D4AF37] mb-6">
     Our Journey Continues...
   </h2>
 
   <div class="slider">
-    <img src="https://picsum.photos/600/400?1" class="active">
-    <img src="https://picsum.photos/600/400?2">
-    <img src="https://picsum.photos/600/400?3">
+    <img src="https://picsum.photos/600/400?1" class="slide active">
+    <img src="https://picsum.photos/600/400?2" class="slide">
+    <img src="https://picsum.photos/600/400?3" class="slide">
   </div>
 </section>
 
@@ -203,14 +225,14 @@ body {
   <h2 class="text-3xl font-[Playfair_Display] mb-4">Venue</h2>
   <p class="mb-4">Grand Palace, Lucknow</p>
 
-  <div class="map-container">
+  <div class="map-card">
     <a href="https://maps.google.com?q=Lucknow" target="_blank">
       <img src="https://maps.googleapis.com/maps/api/staticmap?center=Lucknow&zoom=14&size=600x300&markers=color:gold|Lucknow">
     </a>
+    <div class="p-4 text-sm text-gray-600">Tap to open in Google Maps</div>
   </div>
 </section>
 
-</div>
 </div>
 
 <!-- MUSIC -->
@@ -220,19 +242,7 @@ body {
 </audio>
 
 <script>
-// ENVELOPE FIXED
-function openInvite(el){
-  el.classList.add("open");
-
-  setTimeout(()=>{
-    document.getElementById("envelopeContainer").style.display="none";
-    const main = document.getElementById("main");
-    main.classList.remove("hidden");
-    main.classList.add("reveal");
-  },1000);
-}
-
-// COUNTDOWN BEAUTIFIED
+// COUNTDOWN
 const target = new Date("Nov 30, 2026").getTime();
 setInterval(()=>{
   let now = new Date().getTime();
@@ -251,14 +261,14 @@ setInterval(()=>{
   `;
 },1000);
 
-// SLIDER FIXED
+// SLIDER
 let i=0;
-const slides=document.querySelectorAll(".slider img");
+const slides=document.querySelectorAll(".slide");
 setInterval(()=>{
-  slides.forEach(img=>img.classList.remove("active"));
+  slides.forEach(s=>s.classList.remove("active"));
   slides[i].classList.add("active");
   i=(i+1)%slides.length;
-},3000);
+},3500);
 
 // MUSIC
 const music=document.getElementById('music');
