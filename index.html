@@ -226,18 +226,16 @@ body {
   .intro-name { font-size: 2rem; }
   .intro-sub { font-size: 0.9rem; }
 
-  /* 🎥 VIDEO FIX */
+  /* 🎥 FINAL VIDEO FIX (NO ZOOM) */
   .video-bg {
-    height: 100vh;
-    overflow: hidden;
+    height: auto;
   }
 
   .video-bg video {
-    width: auto;
-    height: 100%;
-    min-width: 100%;
-    object-fit: cover;
-    object-position: center;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    background: black;
   }
 }
 </style>
@@ -245,6 +243,7 @@ body {
 
 <body>
 
+<!-- INTRO -->
 <div id="introScreen">
   <video autoplay muted loop class="intro-video">
     <source src="https://www.w3schools.com/howto/rain.mp4">
@@ -273,7 +272,7 @@ body {
 
     <img src="lordganesh.png" class="ganesha-center">
 
-    <h1 class="name">Nirbhay <span>&</span> Shalu</h1>
+    <h1 class="name">Nirbhay <span>&</span> Partner</h1>
 
     <p class="invite-line">
       Together with their families, request the pleasure of your presence
@@ -309,6 +308,7 @@ body {
 
 </div>
 
+<!-- MUSIC -->
 <div id="musicBtn">🎵</div>
 <audio id="music" loop>
   <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
