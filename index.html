@@ -226,16 +226,21 @@ body {
   .intro-name { font-size: 2rem; }
   .intro-sub { font-size: 0.9rem; }
 
-  /* 🎥 FINAL VIDEO FIX (NO ZOOM) */
+  /* 🎥 FINAL VIDEO FIX */
   .video-bg {
-    height: auto;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: black;
   }
 
   .video-bg video {
-    width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
     height: auto;
     object-fit: contain;
-    background: black;
   }
 }
 </style>
@@ -243,7 +248,6 @@ body {
 
 <body>
 
-<!-- INTRO -->
 <div id="introScreen">
   <video autoplay muted loop class="intro-video">
     <source src="https://www.w3schools.com/howto/rain.mp4">
@@ -308,13 +312,13 @@ body {
 
 </div>
 
-<!-- MUSIC -->
 <div id="musicBtn">🎵</div>
 <audio id="music" loop>
   <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
 </audio>
 
 <script>
+// intro
 window.addEventListener("load", () => {
   setTimeout(() => {
     const intro = document.getElementById("introScreen");
@@ -328,6 +332,7 @@ window.addEventListener("load", () => {
   }, 2200);
 });
 
+// countdown (your accurate one)
 const targetDate = new Date("Nov 30, 2026");
 
 function updateCountdown() {
@@ -368,6 +373,7 @@ function updateCountdown() {
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
+// slider
 let i=0;
 const slides=document.querySelectorAll(".slide");
 setInterval(()=>{
@@ -376,6 +382,7 @@ setInterval(()=>{
   i=(i+1)%slides.length;
 },3000);
 
+// music
 const music=document.getElementById('music');
 const btn=document.getElementById('musicBtn');
 
