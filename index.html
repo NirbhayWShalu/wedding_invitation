@@ -95,7 +95,6 @@ body {
 .top-right { top:0; right:0; }
 .bottom-left { bottom:0; left:0; transform: rotate(90deg);}
 
-
 /* HERO */
 .video-bg {
   height: 100vh;
@@ -179,28 +178,60 @@ body {
   cursor: pointer;
 }
 
-/* 🕉️ GANESHA CENTER (UPDATED) */
+/* 🕉️ GANESHA */
 .ganesha-center {
   width: 55px;
   margin-bottom: 12px;
   opacity: 0.95;
-  background: none;
-  padding: 0;
-  border-radius: 0;
   filter: drop-shadow(0 0 6px rgba(212,175,55,0.6));
-  animation: ganeshaFade 1.5s ease forwards;
 }
 
-@keyframes ganeshaFade {
-  from { opacity: 0; transform: translateY(-10px); }
-  to { opacity: 0.95; transform: translateY(0); }
+/* 📱 MOBILE FIX */
+@media (max-width: 768px) {
+
+  .name { font-size: 2.2rem; }
+
+  .invite-line {
+    font-size: 0.9rem;
+    padding: 0 10px;
+  }
+
+  .ganesha-center { width: 45px; }
+
+  .slider {
+    max-width: 90%;
+    height: 200px;
+  }
+
+  .map-card {
+    max-width: 90%;
+  }
+
+  .map-card iframe {
+    width: 100%;
+    height: 220px;
+  }
+
+  .corner {
+    width: 90px;
+  }
+
+  #musicBtn {
+    bottom: 15px;
+    right: 15px;
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .intro-name { font-size: 2rem; }
+  .intro-sub { font-size: 0.9rem; }
 }
 </style>
 </head>
 
 <body>
 
-<!-- 🎬 INTRO -->
+<!-- INTRO -->
 <div id="introScreen">
   <video autoplay muted loop class="intro-video">
     <source src="https://www.w3schools.com/howto/rain.mp4">
@@ -208,19 +239,16 @@ body {
   <div class="intro-overlay"></div>
 
   <div class="intro-content">
-    <h1 class="intro-name">
-      Nirbhay <span>&</span> Shalu
-    </h1>
+    <h1 class="intro-name">Nirbhay <span>&</span> Shalu</h1>
     <div class="intro-line"></div>
     <p class="intro-sub">30 November 2026</p>
   </div>
 </div>
 
-<!-- 🧧 CORNERS -->
+<!-- CORNERS -->
 <img src="Top.png" class="corner top-right">
 <img src="Bottom.png" class="corner bottom-left">
 
-<!-- MAIN -->
 <div id="main" style="display:none;">
 
 <section class="video-bg">
@@ -231,8 +259,7 @@ body {
 
   <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
 
-    <!-- 🕉️ GANESHA CENTER -->
-    <img src="lordganesh.png" alt="Lord Ganesha" class="ganesha-center">
+    <img src="lordganesh.png" class="ganesha-center">
 
     <h1 class="name">Nirbhay <span>&</span> Partner</h1>
 
@@ -261,81 +288,55 @@ body {
   <p class="mb-4">Grand Palace, Lucknow</p>
 
   <div class="map-card">
-    <iframe src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d3575.3392701684916!2d81.1581766!3d26.3478865!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjbCsDIwJzUwLjMiTiA4McKwMDknMzQuNyJF!5e0!3m2!1sen!2sin!4v1777030926628!5m2!1sen!2sin" 
-      width="400" height="300" style="border:0;">
-      </iframe>
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m13!1m8!1m3!1d3575.3392701684916!2d81.1581766!3d26.3478865!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjbCsDIwJzUwLjMiTiA4McKwMDknMzQuNyJF!5e0!3m2!1sen!2sin!4v1777030926628!5m2!1sen!2sin"
+      width="100%" height="250" style="border:0;">
+    </iframe>
   </div>
 </section>
 
 </div>
 
-<!-- MUSIC -->
 <div id="musicBtn">🎵</div>
 <audio id="music" loop>
   <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
 </audio>
 
 <script>
-// 🎬 INTRO TRANSITION (UPDATED SPEED)
 window.addEventListener("load", () => {
   setTimeout(() => {
     const intro = document.getElementById("introScreen");
-
     intro.style.transition = "all 0.8s ease";
     intro.style.opacity = "0";
     intro.style.transform = "scale(1.1)";
-
     setTimeout(() => {
       intro.style.display = "none";
       document.getElementById("main").style.display = "block";
     }, 800);
-
   }, 2200);
 });
 
-// ⏱️ COUNTDOWN
 const targetDate = new Date("Nov 30, 2026");
 
 function updateCountdown() {
   const now = new Date();
+  const diff = targetDate - now;
 
-  let years = targetDate.getFullYear() - now.getFullYear();
-  let months = targetDate.getMonth() - now.getMonth();
-  let days = targetDate.getDate() - now.getDate();
-
-  if (days < 0) {
-    months--;
-    const prevMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-    days += prevMonth.getDate();
-  }
-
-  if (months < 0) {
-    years--;
-    months += 12;
-  }
-
-  let hours = targetDate.getHours() - now.getHours();
-  let minutes = targetDate.getMinutes() - now.getMinutes();
-  let seconds = targetDate.getSeconds() - now.getSeconds();
-
-  if (seconds < 0) { seconds += 60; minutes--; }
-  if (minutes < 0) { minutes += 60; hours--; }
-  if (hours < 0) { hours += 24; days--; }
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((diff / 1000 / 60) % 60);
+  const seconds = Math.floor((diff / 1000) % 60);
 
   document.getElementById("countdown").innerHTML = `
-    ${years > 0 ? `<div class="count-box"><span>${years}</span>Years</div>` : ""}
-    <div class="count-box"><span>${months}</span>Months</div>
     <div class="count-box"><span>${days}</span>Days</div>
     <div class="count-box"><span>${hours}</span>Hours</div>
     <div class="count-box"><span>${minutes}</span>Minutes</div>
     <div class="count-box"><span>${seconds}</span>Seconds</div>
-    
   `;
 }
 setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// SLIDER
 let i=0;
 const slides=document.querySelectorAll(".slide");
 setInterval(()=>{
@@ -344,7 +345,6 @@ setInterval(()=>{
   i=(i+1)%slides.length;
 },3000);
 
-// MUSIC
 const music=document.getElementById('music');
 const btn=document.getElementById('musicBtn');
 
