@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 <title>Wedding Invitation</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Montserrat:wght@300;400;600&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
+
 <script src="https://cdn.tailwindcss.com"></script>
 
 <style>
@@ -14,22 +15,77 @@ body {
   margin: 0;
   background: #FDF5E6;
   font-family: 'Montserrat', sans-serif;
-  overflow-x: hidden;
 }
 
-/* MOBILE ONLY FRAME */
+/* 📱 MOBILE ONLY */
 html, body {
   max-width: 480px;
   margin: auto;
+  overflow-x: hidden;
 }
 
-/* HERO */
+/* 🎀 HEADER */
+.header {
+  text-align: center;
+  padding: 15px 10px 5px;
+}
+
+.header h1 {
+  font-family: 'Playfair Display';
+  font-size: 1.6rem;
+  color: #333;
+}
+
+.header h2 {
+  font-family: 'Cormorant Garamond';
+  font-size: 1.3rem;
+  color: #D4AF37;
+}
+
+/* 🎬 INTRO */
+#introScreen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+}
+
+.intro-video {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(8px) brightness(0.6);
+}
+
+.intro-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+}
+
+.intro-content {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  text-align: center;
+}
+
+.intro-name {
+  font-family: 'Playfair Display';
+  font-size: 2rem;
+  color: white;
+}
+.intro-name span {
+  color: #D4AF37;
+}
+
+/* 🎥 HERO */
 .video-section {
   min-height: 100vh;
+  background: #FDF5E6;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #FDF5E6;
 }
 
 .video-box {
@@ -40,19 +96,19 @@ html, body {
 .video-box video {
   width: 100%;
   object-fit: contain;
-  display: block;
   background: #FDF5E6;
 }
 
-/* OVERLAY */
+/* OVERLAY CONTENT */
 .overlay-content {
   position: absolute;
   inset: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   text-align: center;
+  padding: 10px;
 }
 
 .name {
@@ -61,21 +117,24 @@ html, body {
   color: white;
 }
 
-.name span { color: #D4AF37; }
+.name span {
+  color: #D4AF37;
+}
 
 .invite-line {
   font-family: 'Cormorant Garamond';
   color: #f3e3a2;
   font-size: 0.9rem;
+  margin-top: 5px;
 }
 
-/* GANESHA */
+/* 🕉️ GANESHA */
 .ganesha-center {
-  width: 40px;
+  width: 42px;
   margin-bottom: 8px;
 }
 
-/* COUNTDOWN */
+/* ⏱️ COUNTDOWN */
 .count-wrap {
   display: flex;
   gap: 8px;
@@ -95,18 +154,10 @@ html, body {
   font-size: 1.2rem;
 }
 
-/* 🪔 QUOTE SECTION (FILLS EMPTY SPACE) */
+/* 🪔 QUOTE SECTION */
 .quote-section {
   padding: 25px 15px;
   text-align: center;
-  background: linear-gradient(to bottom, #FDF5E6, #f7ecd4);
-}
-
-.quote {
-  font-family: 'Cormorant Garamond';
-  font-size: 1rem;
-  color: #333;
-  line-height: 1.6;
 }
 
 .divider {
@@ -114,18 +165,12 @@ html, body {
   height: 2px;
   background: #D4AF37;
   margin: 10px auto;
-  border-radius: 5px;
 }
 
-/* JOURNEY */
-.section {
-  padding: 40px 15px;
-  text-align: center;
-}
-
-.section h2 {
-  font-family: 'Playfair Display';
-  color: #D4AF37;
+.quote {
+  font-family: 'Cormorant Garamond';
+  color: #333;
+  font-size: 1rem;
 }
 
 /* SLIDER */
@@ -144,30 +189,33 @@ html, body {
   transition: 1s;
 }
 
-.slide.active { opacity: 1; }
-
-/* MAP */
-.map {
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-/* MUSIC */
-#musicBtn {
-  position: fixed;
-  bottom: 15px;
-  right: 15px;
-  background: #D4AF37;
-  color: white;
-  padding: 10px;
-  border-radius: 50%;
+.slide.active {
+  opacity: 1;
 }
 </style>
 </head>
 
 <body>
 
-<!-- HERO -->
+<!-- 🎀 HEADER -->
+<div class="header">
+  <h1>Wedding Invitation</h1>
+  <h2>शुभ विवाह</h2>
+</div>
+
+<!-- 🎬 INTRO -->
+<div id="introScreen">
+  <video autoplay muted loop class="intro-video">
+    <source src="https://www.w3schools.com/howto/rain.mp4">
+  </video>
+  <div class="intro-overlay"></div>
+
+  <div class="intro-content">
+    <h1 class="intro-name">Nirbhay <span>&</span> Shalu</h1>
+  </div>
+</div>
+
+<!-- 🎥 HERO -->
 <section class="video-section">
 
   <div class="video-box">
@@ -180,7 +228,7 @@ html, body {
 
       <img src="lordganesh.png" class="ganesha-center">
 
-      <h1 class="name">Nirbhay <span>&</span> Partner</h1>
+      <h1 class="name">Nirbhay <span>&</span> Shalu</h1>
 
       <p class="invite-line">
         Together with their families, request your presence
@@ -190,20 +238,23 @@ html, body {
 
     </div>
   </div>
+
 </section>
 
-<!-- 🪔 FILLER QUOTE SECTION -->
+<!-- 🪔 QUOTE -->
 <div class="quote-section">
   <div class="divider"></div>
   <p class="quote">
-    “Two hearts, one journey, a lifetime of memories begins here.”
+    “Two hearts, one journey, a lifetime begins here.”
   </p>
   <div class="divider"></div>
 </div>
 
-<!-- JOURNEY -->
-<div class="section">
-  <h2>Our Journey Continues</h2>
+<!-- 🌸 JOURNEY -->
+<div class="quote-section">
+  <h2 style="font-family:'Playfair Display'; color:#D4AF37;">
+    Our Journey Continues
+  </h2>
 
   <div class="slider">
     <img src="https://picsum.photos/400/300?1" class="slide active">
@@ -212,49 +263,36 @@ html, body {
   </div>
 </div>
 
-<!-- MAP -->
-<div class="section">
-  <h2>Venue</h2>
-  <p>Grand Palace, Lucknow</p>
-
-  <div class="map">
-    <iframe 
-      src="https://www.google.com/maps/embed?pb=!1m18..."
-      width="100%" height="220" style="border:0;">
-    </iframe>
-  </div>
-</div>
-
-<!-- MUSIC -->
-<div id="musicBtn">🎵</div>
-
-<audio id="music" loop>
-  <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
-</audio>
-
 <script>
 
-// countdown ONLY M D H M S
+// 🎬 INTRO AUTO CLOSE
+window.onload = () => {
+  setTimeout(() => {
+    document.getElementById("introScreen").style.display = "none";
+  }, 2000);
+};
+
+// ⏱️ COUNTDOWN (M D H M S)
 const targetDate = new Date("Nov 30, 2026");
 
-function updateCountdown(){
+function updateCountdown() {
   const now = new Date();
 
   let months = (targetDate.getFullYear()-now.getFullYear())*12 + (targetDate.getMonth()-now.getMonth());
   let days = targetDate.getDate()-now.getDate();
 
-  if(days<0){
+  if (days < 0) {
     months--;
-    days+=30;
+    days += 30;
   }
 
   let hours = targetDate.getHours()-now.getHours();
   let minutes = targetDate.getMinutes()-now.getMinutes();
   let seconds = targetDate.getSeconds()-now.getSeconds();
 
-  if(seconds<0){ seconds+=60; minutes--; }
-  if(minutes<0){ minutes+=60; hours--; }
-  if(hours<0){ hours+=24; days--; }
+  if (seconds < 0) { seconds += 60; minutes--; }
+  if (minutes < 0) { minutes += 60; hours--; }
+  if (hours < 0) { hours += 24; days--; }
 
   document.getElementById("countdown").innerHTML = `
     <div class="count-box"><span>${months}</span>M</div>
@@ -265,23 +303,18 @@ function updateCountdown(){
   `;
 }
 
-setInterval(updateCountdown,1000);
+setInterval(updateCountdown, 1000);
 updateCountdown();
 
-// slider
-let i=0;
-const slides=document.querySelectorAll(".slide");
-setInterval(()=>{
-  slides.forEach(s=>s.classList.remove("active"));
-  slides[i].classList.add("active");
-  i=(i+1)%slides.length;
-},3000);
+// 🌸 SLIDER
+let i = 0;
+const slides = document.querySelectorAll(".slide");
 
-// music
-const music=document.getElementById("music");
-document.getElementById("musicBtn").onclick=()=>{
-  music.paused ? music.play() : music.pause();
-};
+setInterval(() => {
+  slides.forEach(s => s.classList.remove("active"));
+  slides[i].classList.add("active");
+  i = (i + 1) % slides.length;
+}, 3000);
 
 </script>
 
