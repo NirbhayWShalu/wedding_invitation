@@ -16,83 +16,36 @@ body {
   margin: 0;
 }
 
-/* 💌 ENVELOPE SCREEN */
-.envelope-screen {
-  position: fixed;
-  inset: 0;
-  background: #FDF5E6;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
+/* 🎬 INTRO */
+#introScreen {
+  background: black;
+  color: white;
 }
-
-/* CONTAINER */
-.envelope-container {
-  position: relative;
-  width: 260px;
-  height: 180px;
-  cursor: pointer;
-}
-
-/* ENVELOPE BODY (CLIPS CONTENT) */
-.envelope-body {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: #D4AF37;
-  border-radius: 6px;
-  overflow: hidden; /* 🔥 KEY FIX */
-  z-index: 2;
-}
-
-/* FLAP */
-.flap {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background: #caa533;
-  clip-path: polygon(0 0,100% 0,50% 100%);
-  transform-origin: top;
-  transition: transform 1s ease;
-  z-index: 3;
-}
-
-/* CARD (INSIDE ENVELOPE) */
-.invite-card {
-  position: absolute;
-  width: 90%;
-  height: 140px;
-  background: white;
-  left: 5%;
-  bottom: -100px; /* starts inside */
-  border-radius: 6px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.intro-name {
   font-family: 'Playfair Display';
-  font-size: 1.2rem;
-  transition: transform 1.2s ease;
+  font-size: clamp(2.5rem,6vw,4rem);
+  opacity: 0;
+  animation: fadeIn 2s forwards;
 }
-
-/* OPEN STATES */
-.open .flap {
-  transform: rotateX(180deg);
+.intro-name span {
+  color: #D4AF37;
+  text-shadow: 0 0 15px rgba(212,175,55,0.7);
 }
-.open .invite-card {
-  transform: translateY(-200px);
+.intro-line {
+  width: 0;
+  height: 2px;
+  background: #D4AF37;
+  margin: 15px auto;
+  animation: lineGrow 1.5s forwards;
+  animation-delay: 1.5s;
 }
-
-/* EXPAND */
-.expand {
-  animation: expandCard 1s forwards;
+.intro-sub {
+  opacity: 0;
+  animation: fadeIn 2s forwards;
+  animation-delay: 2s;
 }
-@keyframes expandCard {
-  to {
-    transform: translateY(-200px) scale(10);
-    opacity: 0;
-  }
-}
+@keyframes fadeIn { to { opacity: 1; } }
+@keyframes lineGrow { to { width: 120px; } }
 
 /* 🧧 CORNERS */
 .corner {
@@ -140,15 +93,10 @@ body {
   font-family: 'Playfair Display';
   font-size: clamp(2.5rem,6vw,5rem);
   color: white;
-  animation: fadeUp 1.5s forwards;
 }
 .name span {
   color: #D4AF37;
   text-shadow: 0 0 12px rgba(212,175,55,0.7);
-}
-@keyframes fadeUp {
-  from {opacity:0; transform:translateY(20px);}
-  to {opacity:1; transform:translateY(0);}
 }
 
 /* INVITE LINE */
@@ -193,11 +141,6 @@ body {
   margin: auto;
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid #ddd;
-  background: white;
-}
-.map-card img {
-  width: 100%;
 }
 
 /* MUSIC */
@@ -216,18 +159,14 @@ body {
 
 <body>
 
-<!-- 💌 ENVELOPE -->
-<div class="envelope-screen" id="envelopeScreen">
-  <div class="envelope-container" onclick="openInvite()">
-    
-    <div class="envelope-body">
-      <div class="invite-card" id="inviteCard">
-        Wedding Invitation
-      </div>
-    </div>
-
-    <div class="flap"></div>
-
+<!-- 🎬 INTRO -->
+<div id="introScreen" class="fixed inset-0 flex items-center justify-center text-center z-[9999]">
+  <div>
+    <h1 class="intro-name">
+      Nirbhay <span>&</span> Partner
+    </h1>
+    <div class="intro-line"></div>
+    <p class="intro-sub">30 November 2026</p>
   </div>
 </div>
 
@@ -248,6 +187,7 @@ body {
   <video autoplay muted loop>
     <source src="https://www.w3schools.com/howto/rain.mp4">
   </video>
+
   <div class="overlay"></div>
 
   <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
@@ -280,9 +220,10 @@ body {
   <p class="mb-4">Grand Palace, Lucknow</p>
 
   <div class="map-card">
-    <a href="https://maps.google.com?q=Lucknow" target="_blank">
-      <img src="https://maps.googleapis.com/maps/api/staticmap?center=Lucknow&zoom=14&size=600x300&markers=color:gold|Lucknow">
-    </a>
+    <iframe 
+      src="https://maps.google.com/maps?q=Lucknow&t=&z=13&ie=UTF8&iwloc=&output=embed"
+      width="100%" height="250" style="border:0;" loading="lazy">
+    </iframe>
   </div>
 </section>
 
@@ -295,22 +236,20 @@ body {
 </audio>
 
 <script>
-// 💌 ENVELOPE (FIXED)
-function openInvite(){
-  const container = document.querySelector('.envelope-container');
-  const card = document.getElementById('inviteCard');
+// 🎬 INTRO
+window.addEventListener("load", () => {
+  setTimeout(() => {
+    const intro = document.getElementById("introScreen");
+    intro.style.transition = "opacity 1s ease";
+    intro.style.opacity = "0";
 
-  container.classList.add("open");
+    setTimeout(() => {
+      intro.style.display = "none";
+      document.getElementById("main").style.display = "block";
+    }, 1000);
 
-  setTimeout(()=>{
-    card.classList.add("expand");
-  },1200);
-
-  setTimeout(()=>{
-    document.getElementById("envelopeScreen").style.display="none";
-    document.getElementById("main").style.display="block";
-  },2000);
-}
+  }, 3500);
+});
 
 // ⏱️ COUNTDOWN
 const targetDate = new Date("Nov 30, 2026");
