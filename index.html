@@ -97,20 +97,6 @@ body {
 .bottom-left { bottom:0; left:0; transform: rotate(-90deg); }
 .bottom-right { bottom:0; right:0; transform: rotate(180deg); }
 
-/* 🕉️ GANESHA */
-.ganesha {
-  position: fixed;
-  top: 15px;
-  left: 15px;
-  width: 55px;
-  z-index: 50;
-  background: rgba(255,255,255,0.7);
-  padding: 6px;
-  border-radius: 50%;
-  backdrop-filter: blur(4px);
-  box-shadow: 0 0 10px rgba(212,175,55,0.4);
-}
-
 /* HERO */
 .video-bg {
   height: 100vh;
@@ -193,6 +179,23 @@ body {
   border-radius: 50px;
   cursor: pointer;
 }
+
+/* 🕉️ GANESHA CENTER (UPDATED) */
+.ganesha-center {
+  width: 55px;
+  margin-bottom: 12px;
+  opacity: 0.95;
+  background: none;
+  padding: 0;
+  border-radius: 0;
+  filter: drop-shadow(0 0 6px rgba(212,175,55,0.6));
+  animation: ganeshaFade 1.5s ease forwards;
+}
+
+@keyframes ganeshaFade {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 0.95; transform: translateY(0); }
+}
 </style>
 </head>
 
@@ -218,8 +221,6 @@ body {
 <img src="Top.png" class="corner top-left">
 <img src="Bottom.png" class="corner bottom-right">
 
-<!-- 🕉️ GANESHA -->
-
 <!-- MAIN -->
 <div id="main" style="display:none;">
 
@@ -231,12 +232,9 @@ body {
 
   <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
 
-  <!-- 🕉️ GANESHA CENTER -->
-  <img 
-    src="lordganesh.png"
-    alt="Lord Ganesha"
-    class="ganesha-center"
-  >
+    <!-- 🕉️ GANESHA CENTER -->
+    <img src="lordganesh.png" alt="Lord Ganesha" class="ganesha-center">
+
     <h1 class="name">Nirbhay <span>&</span> Partner</h1>
 
     <p class="invite-line">
@@ -280,21 +278,21 @@ body {
 </audio>
 
 <script>
-// 🎬 INTRO TRANSITION
+// 🎬 INTRO TRANSITION (UPDATED SPEED)
 window.addEventListener("load", () => {
   setTimeout(() => {
     const intro = document.getElementById("introScreen");
 
-    intro.style.transition = "all 1.2s ease";
+    intro.style.transition = "all 0.8s ease";
     intro.style.opacity = "0";
     intro.style.transform = "scale(1.1)";
 
     setTimeout(() => {
       intro.style.display = "none";
       document.getElementById("main").style.display = "block";
-    }, 1200);
+    }, 800);
 
-  }, 3500);
+  }, 2200);
 });
 
 // ⏱️ COUNTDOWN
