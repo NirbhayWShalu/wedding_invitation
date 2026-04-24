@@ -13,26 +13,63 @@
 body {
   font-family: 'Montserrat', sans-serif;
   background: #FDF5E6;
+  margin: 0;
 }
 
-/* 🧧 CORNER FLORAL (VISIBLE) */
+/* 💌 ENVELOPE */
+.envelope-screen {
+  position: fixed;
+  inset: 0;
+  background: #FDF5E6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.envelope {
+  width: 260px;
+  height: 160px;
+  background: #D4AF37;
+  border-radius: 6px;
+  position: relative;
+  cursor: pointer;
+}
+.flap {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: #caa533;
+  clip-path: polygon(0 0,100% 0,50% 100%);
+  transform-origin: top;
+  transition: transform 1s ease;
+}
+.open .flap {
+  transform: rotateX(180deg);
+}
+
+/* 🧧 CORNERS */
 .corner {
   position: fixed;
-  width: 70px;
+  width: 90px;
   z-index: 5;
 }
-.top-left { top: 0; left: 0; }
-.top-right { top: 0; right: 0; transform: rotate(90deg); }
-.bottom-left { bottom: 0; left: 0; transform: rotate(-90deg); }
-.bottom-right { bottom: 0; right: 0; transform: rotate(180deg); }
+.top-left { top:0; left:0; }
+.top-right { top:0; right:0; transform: rotate(90deg); }
+.bottom-left { bottom:0; left:0; transform: rotate(-90deg); }
+.bottom-right { bottom:0; right:0; transform: rotate(180deg); }
 
-/* 🕉️ GANESHA FIXED */
+/* 🕉️ GANESHA IMAGE */
 .ganesha {
   position: fixed;
-  top: 12px;
-  left: 12px;
-  width: 45px;
-  z-index: 10;
+  top: 15px;
+  left: 15px;
+  width: 55px;
+  z-index: 50;
+  background: rgba(255,255,255,0.7);
+  padding: 6px;
+  border-radius: 50%;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 0 10px rgba(212,175,55,0.4);
 }
 
 /* HERO */
@@ -56,23 +93,18 @@ body {
   font-family: 'Playfair Display';
   font-size: clamp(2.5rem,6vw,5rem);
   color: white;
-  opacity: 0;
-  transform: translateY(20px);
   animation: fadeUp 1.5s forwards;
 }
 .name span {
   color: #D4AF37;
-  animation: glow 2s forwards;
-  animation-delay: 1s;
+  text-shadow: 0 0 12px rgba(212,175,55,0.7);
 }
 @keyframes fadeUp {
+  from {opacity:0; transform:translateY(20px);}
   to {opacity:1; transform:translateY(0);}
 }
-@keyframes glow {
-  to {text-shadow: 0 0 15px rgba(212,175,55,0.7);}
-}
 
-/* ✍️ INVITE LINE FIXED */
+/* INVITE */
 .invite-line {
   font-family: 'Cormorant Garamond', serif;
   color: #f3e3a2;
@@ -80,22 +112,17 @@ body {
   margin-top: 10px;
 }
 
-/* ⏱️ COUNTDOWN (RESTORED PREMIUM) */
+/* COUNTDOWN */
 .count-box {
   color: white;
   text-align: center;
-  padding: 8px 12px;
-  border-radius: 8px;
-  background: rgba(255,255,255,0.1);
-  backdrop-filter: blur(6px);
 }
 .count-box span {
   font-size: 1.5rem;
-  display: block;
-  text-shadow: 0 0 10px rgba(212,175,55,0.7);
+  color: #D4AF37;
 }
 
-/* 📸 MEMORY FIXED */
+/* MEMORY */
 .slider {
   max-width: 360px;
   height: 240px;
@@ -109,13 +136,11 @@ body {
   object-fit: cover;
   border-radius: 12px;
   opacity: 0;
-  transition: opacity 1s ease;
+  transition: opacity 1s;
 }
-.slide.active {
-  opacity: 1;
-}
+.slide.active { opacity: 1; }
 
-/* 🗺️ MAP FIXED */
+/* MAP */
 .map-card {
   max-width: 360px;
   margin: auto;
@@ -126,7 +151,6 @@ body {
 }
 .map-card img {
   width: 100%;
-  height: auto;
 }
 
 /* MUSIC */
@@ -145,16 +169,26 @@ body {
 
 <body>
 
-<!-- 🧧 CORNERS (SVG floral) -->
+<!-- 💌 ENVELOPE -->
+<div class="envelope-screen" id="envelopeScreen">
+  <div class="envelope" onclick="openInvite(this)">
+    <div class="flap"></div>
+  </div>
+</div>
+
+<!-- 🧧 CORNERS -->
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Floral_corner_gold.svg" class="corner top-left">
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Floral_corner_gold.svg" class="corner top-right">
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Floral_corner_gold.svg" class="corner bottom-left">
 <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Floral_corner_gold.svg" class="corner bottom-right">
 
 <!-- 🕉️ GANESHA -->
-<img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Ganesha_simple_icon.png" class="ganesha">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Ganesha_Vector.svg/512px-Ganesha_Vector.svg.png" 
+     alt="Lord Ganesha" class="ganesha">
 
-<!-- HERO -->
+<!-- MAIN -->
+<div id="main" style="display:none;">
+
 <section class="video-bg">
   <video autoplay muted loop>
     <source src="https://www.w3schools.com/howto/rain.mp4">
@@ -172,7 +206,7 @@ body {
       Together with their families, request the pleasure of your presence
     </p>
 
-    <div class="flex gap-3 mt-6" id="countdown"></div>
+    <div class="flex gap-4 mt-6 flex-wrap justify-center" id="countdown"></div>
   </div>
 </section>
 
@@ -199,9 +233,9 @@ body {
       <img src="https://maps.googleapis.com/maps/api/staticmap?center=Lucknow&zoom=14&size=600x300&markers=color:gold|Lucknow">
     </a>
   </div>
-
-  <p class="text-sm mt-3 text-gray-500">Tap to open in Google Maps</p>
 </section>
+
+</div>
 
 <!-- MUSIC -->
 <div id="musicBtn">🎵</div>
@@ -210,24 +244,56 @@ body {
 </audio>
 
 <script>
-// COUNTDOWN
-const target = new Date("Nov 30, 2026").getTime();
-setInterval(()=>{
-  let now = new Date().getTime();
-  let diff = target - now;
+// 💌 ENVELOPE
+function openInvite(el){
+  el.classList.add("open");
+  setTimeout(()=>{
+    document.getElementById("envelopeScreen").style.display="none";
+    document.getElementById("main").style.display="block";
+  },1000);
+}
 
-  let d = Math.floor(diff/(1000*60*60*24));
-  let h = Math.floor((diff%(1000*60*60*24))/(1000*60*60));
-  let m = Math.floor((diff%(1000*60*60))/(1000*60));
-  let s = Math.floor((diff%(1000*60))/1000);
+// ⏱️ ACCURATE COUNTDOWN
+const targetDate = new Date("Nov 30, 2026");
+
+function updateCountdown() {
+  const now = new Date();
+
+  let years = targetDate.getFullYear() - now.getFullYear();
+  let months = targetDate.getMonth() - now.getMonth();
+  let days = targetDate.getDate() - now.getDate();
+
+  if (days < 0) {
+    months--;
+    const prevMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+    days += prevMonth.getDate();
+  }
+
+  if (months < 0) {
+    years--;
+    months += 12;
+  }
+
+  let hours = targetDate.getHours() - now.getHours();
+  let minutes = targetDate.getMinutes() - now.getMinutes();
+  let seconds = targetDate.getSeconds() - now.getSeconds();
+
+  if (seconds < 0) { seconds += 60; minutes--; }
+  if (minutes < 0) { minutes += 60; hours--; }
+  if (hours < 0) { hours += 24; days--; }
 
   document.getElementById("countdown").innerHTML = `
-    <div class="count-box"><span>${d}</span>Days</div>
-    <div class="count-box"><span>${h}</span>Hours</div>
-    <div class="count-box"><span>${m}</span>Minutes</div>
-    <div class="count-box"><span>${s}</span>Seconds</div>
+    ${years > 0 ? `<div class="count-box"><span>${years}</span>Years</div>` : ""}
+    <div class="count-box"><span>${months}</span>Months</div>
+    <div class="count-box"><span>${days}</span>Days</div>
+    <div class="count-box"><span>${hours}</span>Hours</div>
+    <div class="count-box"><span>${minutes}</span>Minutes</div>
+    <div class="count-box"><span>${seconds}</span>Seconds</div>
   `;
-},1000);
+}
+
+setInterval(updateCountdown, 1000);
+updateCountdown();
 
 // SLIDER
 let i=0;
