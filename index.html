@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>Wedding Invitation</title>
 
@@ -12,68 +12,19 @@
 <style>
 body {
   margin: 0;
-  padding: 0;
   background: #FDF5E6;
   font-family: 'Montserrat', sans-serif;
   overflow-x: hidden;
 }
 
-/* ❌ FORCE MOBILE ONLY */
+/* MOBILE ONLY FRAME */
 html, body {
-  width: 100%;
   max-width: 480px;
-  margin: 0 auto;
+  margin: auto;
 }
 
-/* 🎬 INTRO */
-#introScreen {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-}
-
-.intro-video {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  filter: blur(8px) brightness(0.6);
-}
-
-.intro-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.4);
-}
-
-.intro-content {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  text-align: center;
-}
-
-.intro-name {
-  font-family: 'Playfair Display';
-  font-size: 2rem;
-  color: white;
-}
-.intro-name span {
-  color: #D4AF37;
-}
-
-/* 🧧 CORNERS */
-.corner {
-  position: fixed;
-  width: 80px;
-  z-index: 5;
-}
-.top-right { top:0; right:0; }
-.bottom-left { bottom:0; left:0; transform: rotate(90deg); }
-
-/* 📱 HERO */
+/* HERO */
 .video-section {
-  width: 100%;
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -88,13 +39,12 @@ html, body {
 
 .video-box video {
   width: 100%;
-  height: auto;
-  display: block;
   object-fit: contain;
+  display: block;
   background: #FDF5E6;
 }
 
-/* CONTENT ON VIDEO */
+/* OVERLAY */
 .overlay-content {
   position: absolute;
   inset: 0;
@@ -103,7 +53,6 @@ html, body {
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 10px;
 }
 
 .name {
@@ -112,32 +61,60 @@ html, body {
   color: white;
 }
 
-.name span {
-  color: #D4AF37;
-}
+.name span { color: #D4AF37; }
 
 .invite-line {
   font-family: 'Cormorant Garamond';
   color: #f3e3a2;
   font-size: 0.9rem;
-  margin-top: 8px;
 }
 
 /* GANESHA */
 .ganesha-center {
   width: 40px;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
 /* COUNTDOWN */
+.count-wrap {
+  display: flex;
+  gap: 8px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .count-box {
   color: white;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   text-align: center;
 }
+
 .count-box span {
   color: #D4AF37;
   font-size: 1.2rem;
+}
+
+/* 🪔 QUOTE SECTION (FILLS EMPTY SPACE) */
+.quote-section {
+  padding: 25px 15px;
+  text-align: center;
+  background: linear-gradient(to bottom, #FDF5E6, #f7ecd4);
+}
+
+.quote {
+  font-family: 'Cormorant Garamond';
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.6;
+}
+
+.divider {
+  width: 60px;
+  height: 2px;
+  background: #D4AF37;
+  margin: 10px auto;
+  border-radius: 5px;
 }
 
 /* JOURNEY */
@@ -149,15 +126,12 @@ html, body {
 .section h2 {
   font-family: 'Playfair Display';
   color: #D4AF37;
-  font-size: 1.5rem;
 }
 
 /* SLIDER */
 .slider {
-  width: 100%;
   height: 200px;
   position: relative;
-  margin-top: 15px;
 }
 
 .slide {
@@ -170,16 +144,12 @@ html, body {
   transition: 1s;
 }
 
-.slide.active {
-  opacity: 1;
-}
+.slide.active { opacity: 1; }
 
 /* MAP */
 .map {
-  width: 100%;
   border-radius: 12px;
   overflow: hidden;
-  margin-top: 10px;
 }
 
 /* MUSIC */
@@ -196,24 +166,6 @@ html, body {
 </head>
 
 <body>
-
-<!-- INTRO -->
-<div id="introScreen">
-  <video autoplay muted loop class="intro-video">
-    <source src="https://www.w3schools.com/howto/rain.mp4">
-  </video>
-  <div class="intro-overlay"></div>
-
-  <div class="intro-content">
-    <h1 class="intro-name">Nirbhay <span>&</span> Shalu</h1>
-  </div>
-</div>
-
-<img src="Top.png" class="corner top-right">
-<img src="Bottom.png" class="corner bottom-left">
-
-<!-- MAIN -->
-<div id="main" style="display:none;">
 
 <!-- HERO -->
 <section class="video-section">
@@ -234,12 +186,20 @@ html, body {
         Together with their families, request your presence
       </p>
 
-      <div id="countdown" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:10px;"></div>
+      <div class="count-wrap" id="countdown"></div>
 
     </div>
   </div>
-
 </section>
+
+<!-- 🪔 FILLER QUOTE SECTION -->
+<div class="quote-section">
+  <div class="divider"></div>
+  <p class="quote">
+    “Two hearts, one journey, a lifetime of memories begins here.”
+  </p>
+  <div class="divider"></div>
+</div>
 
 <!-- JOURNEY -->
 <div class="section">
@@ -265,48 +225,43 @@ html, body {
   </div>
 </div>
 
-</div>
-
 <!-- MUSIC -->
 <div id="musicBtn">🎵</div>
+
 <audio id="music" loop>
   <source src="https://www.bensound.com/bensound-music/bensound-romantic.mp3">
 </audio>
 
 <script>
 
-// intro
-window.onload = () => {
-  setTimeout(() => {
-    document.getElementById("introScreen").style.display = "none";
-    document.getElementById("main").style.display = "block";
-  }, 2000);
-};
-
-// countdown (same logic)
+// countdown ONLY M D H M S
 const targetDate = new Date("Nov 30, 2026");
 
 function updateCountdown(){
   const now = new Date();
 
-  let years = targetDate.getFullYear() - now.getFullYear();
-  let months = targetDate.getMonth() - now.getMonth();
-  let days = targetDate.getDate() - now.getDate();
+  let months = (targetDate.getFullYear()-now.getFullYear())*12 + (targetDate.getMonth()-now.getMonth());
+  let days = targetDate.getDate()-now.getDate();
 
-  if(days < 0){
+  if(days<0){
     months--;
-    days += 30;
+    days+=30;
   }
 
-  if(months < 0){
-    years--;
-    months += 12;
-  }
+  let hours = targetDate.getHours()-now.getHours();
+  let minutes = targetDate.getMinutes()-now.getMinutes();
+  let seconds = targetDate.getSeconds()-now.getSeconds();
+
+  if(seconds<0){ seconds+=60; minutes--; }
+  if(minutes<0){ minutes+=60; hours--; }
+  if(hours<0){ hours+=24; days--; }
 
   document.getElementById("countdown").innerHTML = `
-    <div class="count-box"><span>${years}</span>Y</div>
     <div class="count-box"><span>${months}</span>M</div>
     <div class="count-box"><span>${days}</span>D</div>
+    <div class="count-box"><span>${hours}</span>H</div>
+    <div class="count-box"><span>${minutes}</span>M</div>
+    <div class="count-box"><span>${seconds}</span>S</div>
   `;
 }
 
@@ -324,9 +279,7 @@ setInterval(()=>{
 
 // music
 const music=document.getElementById("music");
-const btn=document.getElementById("musicBtn");
-
-btn.onclick=()=>{
+document.getElementById("musicBtn").onclick=()=>{
   music.paused ? music.play() : music.pause();
 };
 
