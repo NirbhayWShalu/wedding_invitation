@@ -24,10 +24,11 @@ html, body {
   overflow-x: hidden;
 }
 
-/* 🎀 HEADER */
+/* 🎀 HEADER (FIXED SPACE ISSUE) */
 .header {
   text-align: center;
-  padding: 15px 10px 5px;
+  padding: 10px 10px 0px;
+  margin-bottom: 0;
 }
 
 .header h1 {
@@ -40,6 +41,7 @@ html, body {
   font-family: 'Cormorant Garamond';
   font-size: 1.3rem;
   color: #D4AF37;
+  margin-top: 2px;
 }
 
 /* 🎬 INTRO */
@@ -75,17 +77,26 @@ html, body {
   font-size: 2rem;
   color: white;
 }
+
 .intro-name span {
   color: #D4AF37;
+}
+
+.intro-date {
+  color: #D4AF37;
+  font-family: 'Cormorant Garamond';
+  margin-top: 8px;
 }
 
 /* 🎥 HERO */
 .video-section {
   min-height: 100vh;
-  background: #FDF5E6;
+  margin-top: 0;
+  padding-top: 0;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #FDF5E6;
 }
 
 .video-box {
@@ -99,7 +110,7 @@ html, body {
   background: #FDF5E6;
 }
 
-/* OVERLAY CONTENT */
+/* OVERLAY */
 .overlay-content {
   position: absolute;
   inset: 0;
@@ -108,7 +119,6 @@ html, body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 10px;
 }
 
 .name {
@@ -128,13 +138,13 @@ html, body {
   margin-top: 5px;
 }
 
-/* 🕉️ GANESHA */
+/* GANESHA */
 .ganesha-center {
   width: 42px;
   margin-bottom: 8px;
 }
 
-/* ⏱️ COUNTDOWN */
+/* COUNTDOWN */
 .count-wrap {
   display: flex;
   gap: 8px;
@@ -154,7 +164,7 @@ html, body {
   font-size: 1.2rem;
 }
 
-/* 🪔 QUOTE SECTION */
+/* QUOTE */
 .quote-section {
   padding: 25px 15px;
   text-align: center;
@@ -192,6 +202,25 @@ html, body {
 .slide.active {
   opacity: 1;
 }
+
+/* MAP */
+.map {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+/* MUSIC */
+#musicBtn {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  background: #D4AF37;
+  color: white;
+  padding: 10px;
+  border-radius: 50%;
+}
 </style>
 </head>
 
@@ -212,6 +241,7 @@ html, body {
 
   <div class="intro-content">
     <h1 class="intro-name">Nirbhay <span>&</span> Shalu</h1>
+    <p class="intro-date">30 November 2026</p>
   </div>
 </div>
 
@@ -238,10 +268,9 @@ html, body {
 
     </div>
   </div>
-
 </section>
 
-<!-- 🪔 QUOTE -->
+<!-- QUOTE -->
 <div class="quote-section">
   <div class="divider"></div>
   <p class="quote">
@@ -250,7 +279,7 @@ html, body {
   <div class="divider"></div>
 </div>
 
-<!-- 🌸 JOURNEY -->
+<!-- JOURNEY -->
 <div class="quote-section">
   <h2 style="font-family:'Playfair Display'; color:#D4AF37;">
     Our Journey Continues
@@ -263,25 +292,31 @@ html, body {
   </div>
 </div>
 
+<!-- MAP -->
+<div class="quote-section">
+  <h2 style="font-family:'Playfair Display'; color:#D4AF37;">Venue</h2>
+  <p>Grand Palace, Lucknow</p>
+
+  <div class="map">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18..."
+      width="100%" height="220" style="border:0;">
+    </iframe>
+  </div>
+</div>
+
 <script>
 
-// 🎬 INTRO AUTO CLOSE
-window.onload = () => {
-  setTimeout(() => {
-    document.getElementById("introScreen").style.display = "none";
-  }, 2000);
-};
-
-// ⏱️ COUNTDOWN (M D H M S)
+/* COUNTDOWN (UNCHANGED LOGIC) */
 const targetDate = new Date("Nov 30, 2026");
 
-function updateCountdown() {
+function updateCountdown(){
   const now = new Date();
 
   let months = (targetDate.getFullYear()-now.getFullYear())*12 + (targetDate.getMonth()-now.getMonth());
   let days = targetDate.getDate()-now.getDate();
 
-  if (days < 0) {
+  if(days < 0){
     months--;
     days += 30;
   }
@@ -290,9 +325,9 @@ function updateCountdown() {
   let minutes = targetDate.getMinutes()-now.getMinutes();
   let seconds = targetDate.getSeconds()-now.getSeconds();
 
-  if (seconds < 0) { seconds += 60; minutes--; }
-  if (minutes < 0) { minutes += 60; hours--; }
-  if (hours < 0) { hours += 24; days--; }
+  if(seconds < 0){ seconds += 60; minutes--; }
+  if(minutes < 0){ minutes += 60; hours--; }
+  if(hours < 0){ hours += 24; days--; }
 
   document.getElementById("countdown").innerHTML = `
     <div class="count-box"><span>${months}</span>M</div>
@@ -303,18 +338,18 @@ function updateCountdown() {
   `;
 }
 
-setInterval(updateCountdown, 1000);
+setInterval(updateCountdown,1000);
 updateCountdown();
 
-// 🌸 SLIDER
-let i = 0;
-const slides = document.querySelectorAll(".slide");
+/* SLIDER */
+let i=0;
+const slides=document.querySelectorAll(".slide");
 
-setInterval(() => {
-  slides.forEach(s => s.classList.remove("active"));
+setInterval(()=>{
+  slides.forEach(s=>s.classList.remove("active"));
   slides[i].classList.add("active");
-  i = (i + 1) % slides.length;
-}, 3000);
+  i=(i+1)%slides.length;
+},3000);
 
 </script>
 
