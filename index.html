@@ -24,7 +24,7 @@ html, body {
   overflow-x: hidden;
 }
 
-/* 🕉️ GANESHA ABOVE HEADER */
+/* 🕉️ GANESHA */
 .ganesha-top {
   display: flex;
   justify-content: center;
@@ -36,22 +36,25 @@ html, body {
   filter: drop-shadow(0 0 6px rgba(212,175,55,0.5));
 }
 
-/* 🎀 HEADER */
+/* 🎀 HEADER (FIXED GAP) */
 .header {
   text-align: center;
-  padding: 8px 10px 0px;
+  padding: 6px 10px 0px;
+  margin-bottom: 0;
 }
 
 .header h1 {
   font-family: 'Playfair Display';
   font-size: 1.6rem;
   color: #333;
+  margin: 0;
 }
 
 .header h2 {
   font-family: 'Cormorant Garamond';
   font-size: 1.3rem;
   color: #D4AF37;
+  margin: 2px 0 0 0;
 }
 
 /* 🎬 INTRO */
@@ -102,6 +105,8 @@ html, body {
 /* 🎥 HERO */
 .video-section {
   min-height: 100vh;
+  margin: 0;
+  padding: 0;
   background: #FDF5E6;
   display: flex;
   justify-content: center;
@@ -144,7 +149,6 @@ html, body {
   font-family: 'Cormorant Garamond';
   color: #f3e3a2;
   font-size: 0.9rem;
-  margin-top: 5px;
 }
 
 /* COUNTDOWN */
@@ -165,6 +169,52 @@ html, body {
 .count-box span {
   color: #D4AF37;
   font-size: 1.2rem;
+}
+
+/* QUOTE */
+.quote-section {
+  padding: 25px 15px;
+  text-align: center;
+}
+
+.divider {
+  width: 60px;
+  height: 2px;
+  background: #D4AF37;
+  margin: 10px auto;
+}
+
+.quote {
+  font-family: 'Cormorant Garamond';
+  color: #333;
+}
+
+/* SLIDER */
+.slider {
+  height: 200px;
+  position: relative;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  opacity: 0;
+  transition: 1s;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+/* MAP */
+.map {
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 10px;
 }
 </style>
 </head>
@@ -218,31 +268,63 @@ html, body {
   </div>
 </section>
 
+<!-- 🪔 QUOTE -->
+<div class="quote-section">
+  <div class="divider"></div>
+  <p class="quote">
+    “Two hearts, one journey, a lifetime begins here.”
+  </p>
+  <div class="divider"></div>
+</div>
+
+<!-- 🌸 MEMORY SLIDER -->
+<div class="quote-section">
+  <h2 style="font-family:'Playfair Display'; color:#D4AF37;">
+    Our Journey Continues
+  </h2>
+
+  <div class="slider">
+    <img src="https://picsum.photos/400/300?1" class="slide active">
+    <img src="https://picsum.photos/400/300?2" class="slide">
+    <img src="https://picsum.photos/400/300?3" class="slide">
+  </div>
+</div>
+
+<!-- 🗺️ MAP -->
+<div class="quote-section">
+  <h2 style="font-family:'Playfair Display'; color:#D4AF37;">Venue</h2>
+  <p>Grand Palace, Lucknow</p>
+
+  <div class="map">
+    <iframe 
+      src="https://www.google.com/maps/embed?pb=!1m18..."
+      width="100%" height="220" style="border:0;">
+    </iframe>
+  </div>
+</div>
+
 <script>
 
-/* ✅ FIXED INTRO (NO STUCK EVER) */
+/* 🎬 INTRO SAFE EXIT */
 window.addEventListener("load", () => {
 
   const intro = document.getElementById("introScreen");
-  const main = document.getElementById("main");
 
-  let closed = false;
+  let done = false;
 
   function closeIntro() {
-    if (closed) return;
-    closed = true;
+    if (done) return;
+    done = true;
 
     intro.style.opacity = "0";
 
     setTimeout(() => {
       intro.style.display = "none";
-      if (main) main.style.display = "block";
     }, 800);
   }
 
   setTimeout(closeIntro, 1800);
   setTimeout(closeIntro, 3500);
-
   intro.addEventListener("click", closeIntro);
 });
 
@@ -279,6 +361,16 @@ function updateCountdown(){
 
 setInterval(updateCountdown,1000);
 updateCountdown();
+
+/* SLIDER */
+let i=0;
+const slides=document.querySelectorAll(".slide");
+
+setInterval(()=>{
+  slides.forEach(s=>s.classList.remove("active"));
+  slides[i].classList.add("active");
+  i=(i+1)%slides.length;
+},3000);
 
 </script>
 
