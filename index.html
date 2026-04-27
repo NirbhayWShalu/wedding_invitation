@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Nirbhay & Shalu | Royal Wedding</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Hind:wght@600&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="floral-frame"></div>
+
+    <div id="intro-overlay">
+        <div class="royal-bg-animation"></div>
+        <div class="intro-content">
+            <img src="lordganesh.png" class="intro-ganesh" alt="Lord Ganesh">
+            
+            <h1 class="royal-title">
+                <span class="name1">Nirbhay</span> 
+                <span class="amp">&</span> 
+                <span class="name2">Shalu</span>
+            </h1>
+            
+            <div class="scratch-container">
+                <div class="revealed-date">
+                    <h2 id="final-date-display">30 . 11 . 2026</h2>
+                </div>
+                <canvas id="scratch-canvas"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <main id="main-site" class="hidden">
+        
+        <header class="traditional-header fade-in">
+            <img src="lordganesh.png" alt="Ganesh" class="main-ganesh">
+            <h2 class="hindi-text">शुभ विवाह</h2>
+        </header>
+
+        <section class="video-section fade-in">
+            <video autoplay muted loop playsinline preload="metadata" class="prewedding-video">
+                <source src="https://www.w3schools.com/howto/rain.mp4" type="video/mp4">
+            </video>
+            
+            <div class="royal-countdown">
+                <div class="timer-box">
+                    <div class="unit"><span id="months">00</span><p>Mon</p></div>
+                    <div class="unit"><span id="days">00</span><p>Day</p></div>
+                    <div class="unit"><span id="hours">00</span><p>Hrs</p></div>
+                    <div class="unit"><span id="minutes">00</span><p>Min</p></div>
+                    <div class="unit"><span id="seconds">00</span><p>Sec</p></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="memories" class="fade-in">
+            <h2 class="section-title">Eternal Memories</h2>
+            <div class="slideshow-container">
+                <img src="https://picsum.photos/400/300?1" class="mySlides active">
+                <img src="https://picsum.photos/400/300?2" class="mySlides">
+                <img src="https://picsum.photos/400/300?3" class="mySlides">
+            </div>
+        </section>
+
+        <section id="location" class="fade-in">
+            <h2 class="section-title">The Royal Venue</h2>
+            <div class="map-wrapper">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d120610.1983056156!2d72.8021664!3d19.1484416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b7cc86714909%3A0xc47e3a9856f70a92!2sMumbai%2C%20Maharashtra!5e0!3m2!1sen!2sin!4v1714200000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </section>
+
+        <footer class="fade-in">
+            <h3>#ShaluGotNirbhay</h3>
+            <div class="social-links">
+                <a href="#">Instagram</a> | <a href="#">WhatsApp</a>
+            </div>
+            <p class="copyright">© 2026 Nirbhay & Shalu</p>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

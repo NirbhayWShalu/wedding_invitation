@@ -1,0 +1,168 @@
+:root {
+    --royal-gold: #d4af37;
+    --deep-maroon: #630d0d;
+    --cream: #fffdf5;
+}
+
+body, html { margin: 0; padding: 0; background: var(--cream); font-family: 'Playfair Display', serif; overflow-x: hidden; }
+
+/* 🌺 RELIABLE FLORAL BORDER */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 15px solid transparent;
+    border-image: url('https://www.transparentpng.com/download/floral/wedding-invitation-floral-border-background-png-6.png') 100 round;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+/* INTRO LAYER */
+#intro-overlay {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    background: radial-gradient(circle, #2c0404, #000);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3000;
+    transition: 1.5s cubic-bezier(0.65, 0, 0.35, 1);
+}
+#intro-overlay.slide-up { transform: translateY(-100%); }
+
+/* ✨ CSS GOLD SPARKLES */
+.royal-bg-animation {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.1) 0%, transparent 80%);
+    overflow: hidden;
+}
+.royal-bg-animation::before {
+    content: "";
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+        radial-gradient(var(--royal-gold), rgba(212,175,55,.1) 1px, transparent 30px);
+    background-size: 100px 100px, 150px 150px;
+    background-position: 0 0, 40px 60px;
+    animation: glitterMove 20s linear infinite;
+    opacity: 0.4;
+}
+@keyframes glitterMove {
+    from { transform: translateY(0); }
+    to { transform: translateY(-100px); }
+}
+
+.intro-content { text-align: center; color: white; z-index: 2; padding: 15px; width: 100%; }
+.intro-ganesh { width: 60px; height: auto; object-fit: contain; margin-bottom: 10px; animation: floating 3s infinite alternate; }
+
+/* ✨ NAME TRANSITIONS */
+.royal-title { font-family: 'Dancing Script'; font-size: 3.2rem; margin-bottom: 25px; overflow: hidden; }
+.name1, .name2, .amp { display: inline-block; opacity: 0; }
+.name1 { color: var(--royal-gold); animation: slideRight 1.5s 0.5s ease-out forwards; }
+.amp { color: white; font-size: 2.2rem; animation: bloom 2s 1.5s ease-out forwards; }
+.name2 { color: var(--royal-gold); animation: slideLeft 1.5s 0.5s ease-out forwards; }
+
+@keyframes slideRight { 0% { transform: translateX(-50px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; text-shadow: 0 0 15px rgba(212,175,55,0.6); } }
+@keyframes slideLeft { 0% { transform: translateX(50px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; text-shadow: 0 0 15px rgba(212,175,55,0.6); } }
+@keyframes bloom { 0% { transform: scale(0); opacity: 0; } 50% { transform: scale(1.2); opacity: 1; } 100% { transform: scale(1); opacity: 1; text-shadow: 0 0 20px #fff; } }
+
+/* SCRATCH BOX */
+.scratch-container {
+    position: relative; width: 280px; height: 150px; margin: 0 auto;
+    background: white; border-radius: 12px; overflow: hidden;
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.4);
+}
+.revealed-date {
+    position: absolute; width: 100%; height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    color: var(--deep-maroon); background: var(--cream); z-index: 1;
+}
+.revealed-date p { font-size: 0.7rem; letter-spacing: 3px; margin-bottom: 5px; font-weight: bold; }
+.revealed-date h2 { font-size: 1.8rem; font-weight: bold; margin: 0; }
+#scratch-canvas { position: absolute; top: 0; left: 0; cursor: crosshair; touch-action: none; z-index: 5; transition: opacity 0.5s; }
+
+/* 🕉️ HEADER */
+.traditional-header { 
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    padding: 40px 20px 20px 20px; 
+}
+.main-ganesh { 
+    width: 90px; 
+    height: auto; 
+    object-fit: contain; 
+    margin-bottom: 12px; 
+}
+.hindi-text { font-family: 'Hind', sans-serif; font-size: 2.8rem; color: var(--deep-maroon); margin: 0; line-height: 1.1; }
+
+/* 📱 MOBILE-FIRST VIDEO */
+.video-section { position: relative; width: 100%; height: 80vh; background: #000; overflow: visible; }
+.prewedding-video { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+
+/* TIMER BOX */
+.royal-countdown { position: absolute; bottom: -25px; width: 100%; z-index: 100; }
+.timer-box {
+    display: flex; justify-content: center; gap: 6px; background: var(--deep-maroon);
+    width: 92%; max-width: 450px; margin: 0 auto; padding: 12px 5px;
+    border: 2px solid var(--royal-gold); border-radius: 40px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+}
+.unit { text-align: center; width: 50px; }
+.unit span { font-size: 1.2rem; color: var(--royal-gold); font-weight: bold; display: block; }
+.unit p { color: white; font-size: 0.45rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
+
+/* 📸 MEMORIES (Fix: Object-fit cover ensures photos are not stretched) */
+.section-title { font-family: 'Dancing Script'; font-size: 2.8rem; text-align: center; margin: 70px 0 30px; color: var(--deep-maroon); }
+.slideshow-container { 
+    position: relative; 
+    width: 90%; 
+    height: 350px; 
+    margin: 0 auto; 
+    overflow: hidden; 
+    border: 5px solid white; 
+    border-radius: 12px; 
+    background-color: #000;
+}
+.mySlides { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; /* FIX: Prevents stretching by cropping the edges instead */
+    object-position: center;
+    position: absolute; 
+    opacity: 0; 
+    transition: opacity 1.5s; 
+}
+.mySlides.active { opacity: 1; }
+
+.map-wrapper iframe { width: 90%; height: 300px; border: 5px solid white; border-radius: 12px; display: block; margin: 0 auto; }
+
+footer { background: #111; color: white; text-align: center; padding: 40px 20px; margin-top: 50px; position: relative; z-index: 10; }
+.social-links a { color: var(--royal-gold); text-decoration: none; margin: 0 10px; font-size: 0.9rem; }
+.fade-in { opacity: 0; transform: translateY(20px); transition: 1.2s ease-out; }
+.fade-in.appear { opacity: 1; transform: translateY(0); }
+
+@keyframes floating { from { transform: translateY(0); } to { transform: translateY(-15px); } }
+
+/* DESKTOP TWEAKS */
+@media (min-width: 768px) {
+    body::after { border-width: 25px; }
+    .royal-title { font-size: 4.5rem; }
+    .hindi-text { font-size: 4rem; }
+    .main-ganesh { width: 120px; } 
+    .timer-box { width: fit-content; gap: 20px; padding: 15px 35px; }
+    .unit span { font-size: 2rem; }
+    .unit p { font-size: 0.6rem; }
+    .slideshow-container { height: 550px; }
+}
