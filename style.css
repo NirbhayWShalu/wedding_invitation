@@ -1,3 +1,27 @@
+/* 🛠️ MOBILE ZOOM & OVERFLOW FIXES */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Prevents horizontal scrolling/zooming */
+    position: relative;
+}
+
+/* Fix for the video to ensure it never goes wider than the screen */
+.video-section {
+    max-width: 100vw;
+    overflow: hidden;
+}
+
+/* Ensure the floral border doesn't create extra width */
+body::after {
+    box-sizing: border-box;
+    max-width: 100%;
+}
 :root {
     --royal-gold: #d4af37;
     --deep-maroon: #630d0d;
