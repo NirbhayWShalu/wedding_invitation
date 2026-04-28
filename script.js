@@ -39,8 +39,8 @@ const ctx = canvas.getContext('2d');
 let isDrawing = false;
 
 // Scaled for mobile
-canvas.width = 280;
-canvas.height = 150;
+canvas.width = 180;
+canvas.height = 70;
 
 // Solid Gold Foil Layer
 ctx.fillStyle = '#d4af37'; 
