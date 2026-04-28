@@ -135,17 +135,18 @@ body::after {
 .video-section { 
     position: relative; 
     width: 100%; 
-    height: auto; /* Changed from 80vh to allow landscape height */
+    height: auto; 
     min-height: 250px; 
-    background: #000; 
+    background: transparent; /* CHANGE #1: Changed from #000 to transparent */
     overflow: visible; 
 }
 
 .prewedding-video { 
     width: 100%; 
     height: auto; 
-    object-fit: contain; /* Changed from cover to show full landscape frame */
+    object-fit: contain; 
     display: block;
+    margin-bottom: -2px; /* CHANGE #2: Add this to hide the bottom gap */
 }
 
 /* TIMER BOX */
