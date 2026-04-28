@@ -147,6 +147,120 @@ body::after {
 .unit span { font-size: 1.2rem; color: var(--royal-gold); font-weight: bold; display: block; }
 .unit p { color: white; font-size: 0.45rem; text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; }
 
+/* 🏷️ SPACING & CARD DESIGN */
+.spacer-gap {
+    height: 100px; /* Adjust this to give enough space under the countdown */
+    width: 100%;
+}
+
+.hindi-invitation-container {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--cream);
+}
+
+.royal-card-box {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    padding: 40px 20px;
+    background: #fff;
+    border: 2px solid var(--royal-gold);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.2), inset 0 0 15px rgba(212, 175, 55, 0.1);
+    text-align: center;
+    border-radius: 5px;
+}
+
+/* 🎨 Decorative Corners */
+.corner {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 3px solid var(--royal-gold);
+}
+.tl { top: 10px; left: 10px; border-right: 0; border-bottom: 0; }
+.tr { top: 10px; right: 10px; border-left: 0; border-bottom: 0; }
+.bl { bottom: 10px; left: 10px; border-right: 0; border-top: 0; }
+.br { bottom: 10px; right: 10px; border-left: 0; border-top: 0; }
+
+/* 🖋️ HINDI TYPOGRAPHY */
+.invitation-quote-hindi {
+    font-family: 'Hind', sans-serif;
+    color: var(--deep-maroon);
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-bottom: 30px;
+    line-height: 1.6;
+}
+
+.quote-sub {
+    font-size: 0.9rem;
+    font-weight: normal;
+    margin-top: 10px;
+    color: #666;
+}
+
+.patrika-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.hindi-label {
+    color: var(--royal-gold);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+}
+
+.hindi-name {
+    font-family: 'Hind', sans-serif;
+    font-size: 2.5rem;
+    color: var(--deep-maroon);
+    margin: 5px 0;
+    font-weight: 700;
+}
+
+.parents-hindi p {
+    margin: 2px 0;
+    color: #444;
+    font-size: 0.95rem;
+}
+
+.h-parent {
+    font-weight: bold;
+    color: var(--deep-maroon) !important;
+}
+
+.card-divider {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--royal-gold);
+    font-weight: bold;
+    font-family: 'Hind', sans-serif;
+}
+
+.divider-icon {
+    width: 40px;
+    margin-bottom: 5px;
+    filter: sepia(1) saturate(5) hue-rotate(0deg); /* Gold filter */
+}
+
+/* 💻 DESKTOP ADAPTATION */
+@media (min-width: 768px) {
+    .patrika-content {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+    .card-side { width: 40%; }
+    .card-divider { width: 10%; }
+    .hindi-name { font-size: 3rem; }
+    .spacer-gap { height: 140px; }
+}
+
 /* 📸 MEMORIES (Fix: Object-fit cover ensures photos are not stretched) */
 .section-title { font-family: 'Dancing Script'; font-size: 2.8rem; text-align: center; margin: 70px 0 30px; color: var(--deep-maroon); }
 .slideshow-container { 
