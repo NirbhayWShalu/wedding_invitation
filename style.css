@@ -141,20 +141,50 @@ body::before {
 .revealed-date h2 { font-size: 1.8rem; font-weight: bold; margin: 0; }
 #scratch-canvas { position: absolute; top: 0; left: 0; cursor: crosshair; touch-action: none; z-index: 5; transition: opacity 0.5s; }
 
-/* 🕉️ HEADER */
 .traditional-header { 
     display: flex;
     flex-direction: column; 
     align-items: center;
-    padding: 40px 20px 20px 20px; 
+    padding: 60px 20px 30px 20px; /* Increased top padding for the border */
+    text-align: center;
 }
+
 .main-ganesh { 
     width: 90px; 
     height: auto; 
     object-fit: contain; 
-    margin-bottom: 12px; 
+    margin-bottom: 15px;
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.3));
 }
-.hindi-text { font-family: 'Hind', sans-serif; font-size: 2.8rem; color: var(--deep-maroon); margin: 0; line-height: 1.1; }
+
+.hindi-text { 
+    font-family: 'Hind', sans-serif; 
+    font-size: 2.5rem; /* Slightly reduced to fit symbols on one line on mobile */
+    color: var(--deep-maroon); 
+    margin: 0; 
+    line-height: 1.2;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between symbols and text */
+}
+
+.royal-symbol {
+    color: var(--royal-gold);
+    font-size: 1.8rem; /* Symbols are slightly smaller than text for elegance */
+    display: inline-block;
+    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.2));
+}
+
+/* 📱 Mobile Specific Tweak */
+@media (max-width: 480px) {
+    .hindi-text {
+        font-size: 1.8rem; /* Ensures it doesn't wrap/zoom on small screens */
+    }
+    .royal-symbol {
+        font-size: 1.4rem;
+    }
+}
 
 /* 📱 MOBILE-FIRST VIDEO */
 .video-section { 
