@@ -50,7 +50,7 @@ body::after {
 
 /* Adds Decorative Corner Accents */
 body::before {
-    content: "🔸"; /* You can also use "🕉️" or "🌺" */
+    content: "N ♾️ S"; /* You can also use "🕉️","🔸" or "🌺" */
     position: fixed;
     top: 15px;
     left: 15px;
