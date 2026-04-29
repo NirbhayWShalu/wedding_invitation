@@ -141,6 +141,7 @@ body::before {
 .revealed-date h2 { font-size: 1.8rem; font-weight: bold; margin: 0; }
 #scratch-canvas { position: absolute; top: 0; left: 0; cursor: crosshair; touch-action: none; z-index: 5; transition: opacity 0.5s; }
 
+/*  HEADER */
 .traditional-header { 
     display: flex;
     flex-direction: column; 
